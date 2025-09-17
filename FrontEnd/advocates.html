@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advocates Slider</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    .advocates-section {
+      padding: 40px 20px;
+      background: #fff;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .advocates-slider {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 10px 0;
+    }
+
+    .advocates-track {
+      display: flex;
+      gap: 20px;
+    }
+
+    .advocate-card {
+      flex: 0 0 auto;
+      width: 300px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      scroll-snap-align: start;
+      transition: transform 0.3s ease;
+    }
+
+    .advocate-image {
+      text-align: center;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .advocate-status {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: green;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .placeholder-icon {
+      font-size: 50px;
+      color: #777;
+    }
+
+    .advocate-name {
+      font-size: 18px;
+      margin: 5px 0;
+      color: #333;
+    }
+
+    .advocate-title {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .advocate-info {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .info-item {
+      margin: 5px 0;
+    }
+
+    .specializations h4 {
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .specialization-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .specialization-tag {
+      background: #eee;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .advocate-actions {
+      margin-top: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 5px 3px 0 0;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #555;
+      color: #fff;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .slider-controls {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .slider-controls button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Advocates Section -->
+  <section class="advocates-section">
+    <div class="container">
+      <a href="index.html#services" class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        Back to Services
+      </a>
+
+      <div class="advocates-slider">
+        <div class="advocates-track">
+
+          <!-- Advocate cards go here (I kept your 6 from earlier) -->
+          <!-- Example (Advocate 1 shown): -->
+          <div>
+            <div class="advocate-image">
+              <div class="advocate-status">Available</div>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXRkaWHcU2uQkkFIwPq5d3t0LuoCPuTFYDpg&s" alt="Adv. Anika Sharma">
+            </div>
+            <div class="advocate-content">
+              <h3 class="advocate-name">Adv. Anika Sharma</h3>
+              <p class="advocate-title">Senior Corporate & Civil Law Specialist</p>
+              <div class="advocate-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43210</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> anika.sharma@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 15+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (245 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">Corporate Law</span>
+                  <span class="specialization-tag">Civil Litigation</span>
+                  <span class="specialization-tag">Contract Disputes</span>
+                  <span class="specialization-tag">Mergers & Acquisitions</span>
+                </div>
+              </div>
+              <div class="advocate-actions">
+                <a href="tel:+919876543210" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
+              </div>
+            </div>
+          </div> <!-- Advocate 2 -->
+          <div>
+            <div class="advocate-image">
+              <div class="advocate-status">Available</div>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmXDcJMUej_FAPvJAvQ9xm_PJZoJPG74Gcrw&s" alt="Adv. Rohan Verma">
+            </div>
+            <div class="advocate-content">
+              <h3 class="advocate-name">Adv. Rohan Verma</h3>
+              <p class="advocate-title">Criminal Defense Specialist</p>
+              <div class="advocate-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43211</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> rohan.verma@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 12+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (198 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">Criminal Defense</span>
+                  <span class="specialization-tag">White Collar Crimes</span>
+                  <span class="specialization-tag">Bail Applications</span>
+                  <span class="specialization-tag">High Court Appeals</span>
+                </div>
+              </div>
+              <div class="advocate-actions">
+                <a href="tel:+919876543211" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advocate 3 -->
+          <div>
+            <div class="advocate-image">
+              <div class="advocate-status">Available</div>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZZmDgDGM-0UYGfjV_l3UABm7AtpO2ABUcfQ&s" alt="Adv. Meera Singh">
+            </div>
+            <div class="advocate-content">
+              <h3 class="advocate-name">Adv. Meera Singh</h3>
+              <p class="advocate-title">Family & Matrimonial Law Expert</p>
+              <div class="advocate-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43212</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> meera.singh@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (312 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">Divorce Proceedings</span>
+                  <span class="specialization-tag">Child Custody</span>
+                  <span class="specialization-tag">Domestic Violence</span>
+                  <span class="specialization-tag">Property Disputes</span>
+                </div>
+              </div>
+              <div class="advocate-actions">
+                <a href="tel:+919876543212" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advocate 4 -->
+          <div>
+            <div class="advocate-image">
+              <div class="advocate-status">Available</div>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjEa8UUBK-JSkLvs6SYxT0WxbC24mpE1u7rg&s" alt="Adv. Vikram Reddy">
+            </div>
+            <div class="advocate-content">
+              <h3 class="advocate-name">Adv. Vikram Reddy</h3>
+              <p class="advocate-title">Intellectual Property & Tech Law</p>
+              <div class="advocate-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43213</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> vikram.reddy@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 8+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (167 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">Patent Law</span>
+                  <span class="specialization-tag">Trademark Registration</span>
+                  <span class="specialization-tag">Copyright Protection</span>
+                  <span class="specialization-tag">Tech Startups</span>
+                </div>
+              </div>
+              <div class="advocate-actions">
+                <a href="tel:+919876543213" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advocate 5 -->
+          <div>
+            <div class="advocate-image">
+              <div class="advocate-status">Available</div>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQic99mu80-DyEtQGWiXWg9ZG9eS8g3p5odVA&s" alt="Adv. Priya Nair"> 
+            </div>
+            <div class="advocate-content">
+              <h3 class="advocate-name">Adv. Priya Nair</h3>
+              <p class="advocate-title">Labour & Employment Law Expert</p>
+              <div class="advocate-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43214</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> priya.nair@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 13+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (289 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">Employment Law</span>
+                  <span class="specialization-tag">Industrial Disputes</span>
+                  <span class="specialization-tag">Workers' Rights</span>
+                  <span class="specialization-tag">Company Compliance</span>
+                </div>
+              </div>
+              <div class="advocate-actions">
+                <a href="tel:+919876543214" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advocate 6 -->
+          <div>
+            <div class="advocate-image">
+              <div class="advocate-status">Available</div>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrgcTHxfAGJ-RxNecaJk0s7YHPFGmpU2FLQ&s" alt="Adv. Arjun Malhotra">
+            </div>
+            <div class="advocate-content">
+              <h3 class="advocate-name">Adv. Arjun Malhotra</h3>
+              <p class="advocate-title">Taxation & Financial Law Expert</p>
+              <div class="advocate-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43215</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> arjun.malhotra@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 11+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (154 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">Taxation Law</span>
+                  <span class="specialization-tag">Corporate Finance</span>
+                  <span class="specialization-tag">GST & Compliance</span>
+                  <span class="specialization-tag">Wealth Management</span>
+                </div>
+              </div>
+              <div class="advocate-actions">
+                <a href="tel:+919876543215" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="slider-controls">
+        <button id="prevBtn">← Prev</button>
+        <button id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Card hover effect
+    document.querySelectorAll('.advocate-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Ripple effect
+    document.querySelectorAll('.btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.height, rect.width);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    // Slider buttons
+    const slider = document.querySelector('.advocates-slider');
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      slider.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      slider.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

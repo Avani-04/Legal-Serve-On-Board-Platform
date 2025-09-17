@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitrators Slider</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    .arbitrators-section {
+      padding: 40px 20px;
+      background: #fff;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .arbitrators-slider {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 10px 0;
+    }
+
+    .arbitrators-track {
+      display: flex;
+      gap: 20px;
+    }
+
+    .arbitrator-card {
+      flex: 0 0 auto;
+      width: 300px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      scroll-snap-align: start;
+      transition: transform 0.3s ease;
+    }
+
+    .arbitrator-image {
+      text-align: center;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .arbitrator-status {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: green;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .arbitrator-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .arbitrator-name {
+      font-size: 18px;
+      margin: 5px 0;
+      color: #333;
+    }
+
+    .arbitrator-title {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .arbitrator-info {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .info-item {
+      margin: 5px 0;
+    }
+
+    .specializations h4 {
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .specialization-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .specialization-tag {
+      background: #eee;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .arbitrator-actions {
+      margin-top: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 12px;
+      margin: 5px 3px 0 0;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #555;
+      color: #fff;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .slider-controls {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .slider-controls button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Arbitrators Section -->
+  <section class="arbitrators-section">
+    <div class="container">
+      <a href="index.html#services" class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        Back to Services
+      </a>
+
+      <div class="arbitrators-slider">
+        <div class="arbitrators-track">
+
+          <!-- Arbitrator 1 -->
+          <div class="arbitrator-card">
+            <div class="arbitrator-image">
+              <div class="arbitrator-status">Available</div>
+              <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Arb. Rajiv Mehta" class="arbitrator-photo">
+            </div>
+            <div class="arbitrator-content">
+              <h3 class="arbitrator-name">Arb. Rajiv Mehta</h3>
+              <p class="arbitrator-title">Commercial Arbitration Expert</p>
+              <div class="arbitrator-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 50010</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> rajiv.mehta@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 18+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (230 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Expertise:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">Commercial Disputes</span>
+                  <span class="specialization-tag">Cross-Border Arbitration</span>
+                  <span class="specialization-tag">Mediation</span>
+                </div>
+              </div>
+              <div class="arbitrator-actions">
+                <a href="tel:+919876550010" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Session</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arbitrator 2 -->
+          <div class="arbitrator-card">
+            <div class="arbitrator-image">
+              <div class="arbitrator-status">Available</div>
+              <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="Arb. Kavita Rao" class="arbitrator-photo">
+            </div>
+            <div class="arbitrator-content">
+              <h3 class="arbitrator-name">Arb. Kavita Rao</h3>
+              <p class="arbitrator-title">International Arbitration Specialist</p>
+              <div class="arbitrator-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 50011</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> kavita.rao@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (198 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Expertise:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">International Disputes</span>
+                  <span class="specialization-tag">Energy Arbitration</span>
+                  <span class="specialization-tag">Treaty Arbitration</span>
+                </div>
+              </div>
+              <div class="arbitrator-actions">
+                <a href="tel:+919876550011" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Session</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arbitrator 3 -->
+          <div class="arbitrator-card">
+            <div class="arbitrator-image">
+              <div class="arbitrator-status">Available</div>
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Arb. Sameer Kulkarni" class="arbitrator-photo">
+            </div>
+            <div class="arbitrator-content">
+              <h3 class="arbitrator-name">Arb. Sameer Kulkarni</h3>
+              <p class="arbitrator-title">Construction & Infrastructure Arbitrator</p>
+              <div class="arbitrator-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 50012</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> sameer.kulkarni@legalconnect.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 16+ Years Experience</div>
+                <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (175 Reviews)</div>
+              </div>
+              <div class="specializations">
+                <h4>Expertise:</h4>
+                <div class="specialization-tags">
+                  <span class="specialization-tag">Construction Disputes</span>
+                  <span class="specialization-tag">Infrastructure Arbitration</span>
+                  <span class="specialization-tag">Contractual Issues</span>
+                </div>
+              </div>
+              <div class="arbitrator-actions">
+                <a href="tel:+919876550012" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Session</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="slider-controls">
+        <button id="prevBtn">← Prev</button>
+        <button id="nextBtn">Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Hover effect
+    document.querySelectorAll('.arbitrator-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px) scale(1.02)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Ripple effect
+    document.querySelectorAll('.btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.height, rect.width);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+    });
+
+    // Slider buttons
+    const slider = document.querySelector('.arbitrators-slider');
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      slider.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      slider.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
