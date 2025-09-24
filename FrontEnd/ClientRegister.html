@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="ClientRegister.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal</title>
+    
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Join LegalConnect India Today</h2>
+            <h1>Welcome Back</h1>
+            <p>Please sign in to your account</p>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('client')">
+                <i class="icon">👤</i> Client Login
+            </button>
+            
+        </div>
+
+        <div class="form-container">
+            <div id="success-message" class="success-message"></div>
+            <div id="error-message" class="error-message"></div>
+
+            <!-- Client Login Form -->
+            <div id="client-form" class="tab-content active">
+                <form onsubmit="handleLogin(event, 'client')">
+                    <div class="form-group">
+                        <label for="client-email">Email Address</label>
+                        <input type="email" id="client-email" name="email" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-password">Password</label>
+                        <input type="password" id="client-password" name="password" required placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember">
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Sign In as Client</button>
+                </form>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                
+                <div class="signup-link">
+                    Don't have an account? <a href="#">Sign up as Client</a>
+                </div>
+            </div>
+
+            </div>
+            </div>
+
+        <script>
+            function handleLogin(event, userType) {
+    event.preventDefault(); // stop form from refreshing page
+
+    const email = document.getElementById("client-email").value.trim();
+    const password = document.getElementById("client-password").value.trim();
+    const errorMessage = document.getElementById("error-message");
+    const successMessage = document.getElementById("success-message");
+
+    // Reset messages
+    errorMessage.textContent = "";
+    successMessage.textContent = "";
+
+    // Email validation (basic regex)
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        errorMessage.textContent = "❌ Please enter a valid email address.";
+        return;
+    }
+
+    // Password validation
+    if (password.length < 6) {
+        errorMessage.textContent = "❌ Password must be at least 6 characters.";
+        return;
+    }
+
+    // ✅ If valid
+    successMessage.textContent = "✅ Login successful! Redirecting...";
+
+    setTimeout(() => {
+        window.location.href = "Services.html"; // redirect after success
+    }, 1500);
+}
+
+        </script>
+            </body>
+</html>

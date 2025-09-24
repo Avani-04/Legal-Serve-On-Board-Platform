@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Consultants Scrollable Grid</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+
+        .writers-section {
+            padding: 20px;
+            background: #fff;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .writers-container {
+            width: 100%;
+            height: 700px;
+            overflow: auto;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .writers-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(280px, 1fr));
+            grid-auto-rows: minmax(min-content, max-content);
+            grid-gap: 20px;
+            padding: 0 10px;
+        }
+
+        .writer-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-width: 280px;
+        }
+        .writer-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .writer-image {
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .writer-status {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: green;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .writer-image img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .writer-name {
+            font-size: 18px;
+            margin: 5px 0;
+            color: #333;
+        }
+        .writer-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .writer-info {
+            font-size: 13px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+        .info-item {
+            margin: 3px 0;
+        }
+        .specializations {
+            margin-top: auto;
+        }
+        .specializations h4 {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        .specialization-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .specialization-tag {
+            background: #eee;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        .writer-actions {
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 3px 2px 0 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 12px;
+            transition: background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: #fff;
+        }
+        .btn-secondary {
+            background: #555;
+            color: #fff;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="writers-section">
+        <a href="index.html#services" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+        <div class="writers-container">
+            <div class="writers-grid">
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/1442295199/photo/successful-financier-investor-works-inside-office-at-work-businessman-in-business-suit-uses.jpg?s=612x612&w=0&k=20&c=NN8M7bjkTOL1pp6oK_iJHk2dQOVjuXpWNzhEtiNSRIU=" alt="Legal Consultant Arjun Desai">
+                    </div>
+                    <h3 class="writer-name">Arjun Desai</h3>
+                    <p class="writer-title">Corporate Law Consultant</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30001</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> arjun.desai@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 12+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Mergers & Acquisitions</span>
+                            <span class="specialization-tag">Corporate Governance</span>
+                            <span class="specialization-tag">Compliance Audits</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530001" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/1311655328/photo/im-the-best-asset-in-my-business.jpg?s=612x612&w=0&k=20&c=ebkVt_iY6rRjXvyx2CESPC8EtcWrv0nYt_y4IdKmN3M=" alt="Legal Consultant Maya Joshi">
+                    </div>
+                    <h3 class="writer-name">Maya Joshi</h3>
+                    <p class="writer-title">Intellectual Property Consultant</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30002</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> maya.joshi@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 9+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Patent Law</span>
+                            <span class="specialization-tag">Trademark Registration</span>
+                            <span class="specialization-tag">Copyrights</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530002" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/1437931505/photo/businessman-digital-tablet-or-strategy-planning-in-hotel-conference-lobby-or-airport-travel.jpg?s=612x612&w=0&k=20&c=OGRd22Usakx9wHTQsKto0qagIlH38sWDPEmmmXcIBSQ=" alt="Legal Consultant Karan Malhotra">
+                    </div>
+                    <h3 class="writer-name">Karan Malhotra</h3>
+                    <p class="writer-title">Real Estate Law Consultant</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bengaluru, Karnataka</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30003</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> karan.malhotra@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 15+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Property Disputes</span>
+                            <span class="specialization-tag">Title Verification</span>
+                            <span class="specialization-tag">Landlord-Tenant Law</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530003" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/167890561/photo/businesswoman-using-laptop-in-office.jpg?s=612x612&w=0&k=20&c=jCVnWDmHruPgamPAdbqdHCfW5wTPOW6R1Xogfli4LME=" alt="Legal Consultant Nisha Rao">
+                    </div>
+                    <h3 class="writer-name">Nisha Rao</h3>
+                    <p class="writer-title">Family Law & Mediation</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30004</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> nisha.rao@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Divorce Proceedings</span>
+                            <span class="specialization-tag">Child Custody</span>
+                            <span class="specialization-tag">Family Property Disputes</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530004" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/1435745704/photo/portrait-of-smiling-mid-adult-businessman-standing-at-corporate-office.jpg?s=612x612&w=0&k=20&c=NtTebZxpAfw964hJJut8WFa__eZEfO07CAKdqeFBrFU=" alt="Legal Consultant Vishal Singh">
+                    </div>
+                    <h3 class="writer-name">Vishal Singh</h3>
+                    <p class="writer-title">Criminal Law Consultant</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Hyderabad, Telangana</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30005</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> vishal.singh@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 18+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Bail Applications</span>
+                            <span class="specialization-tag">Criminal Defense</span>
+                            <span class="specialization-tag">Cyber Crimes</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530005" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/1330965067/photo/productivity-powered-by-digital-technology.jpg?s=612x612&w=0&k=20&c=R6WGqC-b8L3MngI--FMhU4Hsg37BtKhdTckFeQGfXSE=" alt="Legal Consultant Pooja Deshmukh">
+                    </div>
+                    <h3 class="writer-name">Pooja Deshmukh</h3>
+                    <p class="writer-title">Civil Litigation & Dispute Resolution</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30006</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> pooja.deshmukh@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Contract Disputes</span>
+                            <span class="specialization-tag">Property Litigation</span>
+                            <span class="specialization-tag">Arbitration & Mediation</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530006" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/2180951990/photo/happy-mid-adult-businessman-enjoying-in-the-office.jpg?s=612x612&w=0&k=20&c=1N3ivehn920tEQx1679_k9fkzzUxfbGgIDc2o0pFb7Y=" alt="Legal Consultant Aditya Roy">
+                    </div>
+                    <h3 class="writer-name">Aditya Roy</h3>
+                    <p class="writer-title">Labour & Employment Law</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kolkata, West Bengal</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30007</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> aditya.roy@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 8+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Employment Contracts</span>
+                            <span class="specialization-tag">Wrongful Termination</span>
+                            <span class="specialization-tag">Workplace Harassment</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530007" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/2155904673/photo/two-businesswomen-talking-in-the-office.jpg?s=612x612&w=0&k=20&c=S33Ud7AHkrMWf6eQtWbI3X8xUI1TOMFQEnUe4Uf6N88=" alt="Legal Consultant Anjali Shah">
+                    </div>
+                    <h3 class="writer-name">Anjali Shah</h3>
+                    <p class="writer-title">Tax & Financial Law</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30008</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> anjali.shah@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 11+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">GST & Income Tax</span>
+                            <span class="specialization-tag">Financial Planning</span>
+                            <span class="specialization-tag">Tax Litigation</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530008" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/935659716/photo/close-up-of-handshake-in-the-office.jpg?s=612x612&w=0&k=20&c=4iQR9nZG2sWAawCfLNUsyedHZLwL0UaS_VWINBUG0_k=" alt="Legal Consultant Rajeev Menon">
+                    </div>
+                    <h3 class="writer-name">Rajeev Menon</h3>
+                    <p class="writer-title">Immigration Law</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bengaluru, Karnataka</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30009</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> rajeev.menon@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 7+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Visa Applications</span>
+                            <span class="specialization-tag">Residency Permits</span>
+                            <span class="specialization-tag">Citizenship Services</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530009" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/2004890053/photo/happy-mature-professional-business-woman-looking-at-laptop-working-in-office.jpg?s=612x612&w=0&k=20&c=DI5wgfdomoPBaAIy3aB41Q3VKgToBg4EJTass0wFwHk=" alt="Legal Consultant Sanjana Mehta">
+                    </div>
+                    <h3 class="writer-name">Sanjana Mehta</h3>
+                    <p class="writer-title">Consumer Protection Law</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30010</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> sanjana.mehta@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 6+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Product Liability</span>
+                            <span class="specialization-tag">Consumer Court Cases</span>
+                            <span class="specialization-tag">Unfair Trade Practices</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530010" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/2161896248/photo/smiling-businessman-in-team-meeting-with-colleagues-in-office.jpg?s=612x612&w=0&k=20&c=6Y1U-APKe1WwLAsYjJIYTkj1Rcpqnir1iE4jBtRhBTk=" alt="Legal Consultant Farhan Malik">
+                    </div>
+                    <h3 class="writer-name">Farhan Malik</h3>
+                    <p class="writer-title">Environmental Law</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Lucknow, Uttar Pradesh</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30011</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> farhan.malik@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Pollution Control</span>
+                            <span class="specialization-tag">Wildlife Protection</span>
+                            <span class="specialization-tag">Environmental Impact Assessments</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530011" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="writer-card">
+                    <div class="writer-image">
+                        <div class="writer-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/1459178010/photo/fashion-industry-black-woman-and-designer-portrait-of-clothing-tailor-with-business-vision.jpg?s=612x612&w=0&k=20&c=XmGyalprlJMrpEPuduBA-YTrcbEXl8p0PFgTxWi0vvU=" alt="Legal Consultant Tina Varghese">
+                    </div>
+                    <h3 class="writer-name">Tina Varghese</h3>
+                    <p class="writer-title">International & Human Rights Law</p>
+                    <div class="writer-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 30012</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> tina.varghese@legalsolutions.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 13+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">International Trade Law</span>
+                            <span class="specialization-tag">Human Rights Advocacy</span>
+                            <span class="specialization-tag">Refugee Law</span>
+                        </div>
+                    </div>
+                    <div class="writer-actions">
+                        <a href="tel:+919876530012" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.height, rect.width);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+</body>
+</html>

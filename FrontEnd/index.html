@@ -4,10 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LegalConnect India - Join the Leading Legal Services Marketplace</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<style>
+.onboarding {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #e0f7fa, #f1f8ff);
+  border-radius: 20px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+  max-width: 700px;
+  margin: 50px auto;
+}
+
+.onboard-header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #023e8a;
+}
+
+.onboard-header h2 {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0px 5px 12px rgba(0,0,0,0.1);
+}
+
+.btn i {
+  font-size: 1.2rem;
+}
+
+.client {
+  background: #0077b6;
+  color: white;
+}
+
+.client:hover {
+  background: #023e8a;
+}
+
+.provider {
+  background: #ff914d;
+  color: white;
+}
+
+.provider:hover {
+  background: #e85d04;
+}
+</style>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -79,7 +148,7 @@
                 <h2>Legal Services We Support</h2>
                 <p>Expand your practice across multiple legal domains and serve clients nationwide</p>
             </div>
-            <a href="advocates.html" style="text-decoration: none; color: inherit;">
+            <!-- <a href="advocates.html" style="text-decoration: none; color: inherit;"> -->
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
@@ -94,7 +163,6 @@
                     </ul>
                 </div>
                 </a>
-                <a href="arbitrators.html" style="text-decoration: none; color: inherit;">
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-handshake"></i>
@@ -108,7 +176,6 @@
                     </ul>
                 </div>
             </a>
-                <a href="mediators.html" style="text-decoration: none; color: inherit;">
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-users"></i>
@@ -585,149 +652,24 @@
     </section>
 
     <!-- Onboarding Form Section -->
-    <section id="onboard" class="onboarding">
-        <div class="container">
-            <div class="onboard-header">
-                <h2>Join LegalConnect India Today</h2>
-                <p>Complete your registration in just 3 simple steps and start earning within 24 hours</p>
-            </div>
-            <div class="onboard-container">
-                <div class="onboard-steps">
-                    <div class="step active" data-step="1">
-                        <div class="step-number">1</div>
-                        <div class="step-info">
-                            <h3>Basic Information</h3>
-                            <p>Your personal and professional details</p>
-                        </div>
-                    </div>
-                    <div class="step" data-step="2">
-                        <div class="step-number">2</div>
-                        <div class="step-info">
-                            <h3>Professional Verification</h3>
-                            <p>License and certification details</p>
-                        </div>
-                    </div>
-                    <div class="step" data-step="3">
-                        <div class="step-number">3</div>
-                        <div class="step-info">
-                            <h3>Profile Setup</h3>
-                            <p>Specializations and service areas</p>
-                        </div>
-                    </div>
-                </div>
+<section id="onboard" class="onboarding">
+  <div class="container">
+    <div class="onboard-header">
+      <h1>🚀 Join <span style="color:#0077b6;">LegalConnect India</span> Today</h1>
+      <h2>You Are A</h2>
+    </div>
 
-                <form id="onboard-form" class="onboard-form">
-                    <!-- Step 1: Basic Information -->
-                    <div class="form-step active" data-step="1">
-                        <h3>Basic Information</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="fullName">Full Name *</label>
-                                <input type="text" id="fullName" name="fullName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="phone">Phone Number *</label>
-                                <input type="tel" id="phone" name="phone" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="experience">Years of Experience *</label>
-                                <select id="experience" name="experience" required>
-                                    <option value="">Select Experience</option>
-                                    <option value="0-2">0-2 years</option>
-                                    <option value="3-5">3-5 years</option>
-                                    <option value="6-10">6-10 years</option>
-                                    <option value="11-15">11-15 years</option>
-                                    <option value="15+">15+ years</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="city">Current City *</label>
-                            <input type="text" id="city" name="city" required>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Professional Verification -->
-                    <div class="form-step" data-step="2">
-                        <h3>Professional Verification</h3>
-                        <div class="form-group">
-                            <label for="profession">Primary Profession *</label>
-                            <select id="profession" name="profession" required>
-                                <option value="">Select Profession</option>
-                                <option value="advocate">Advocate/Lawyer</option>
-                                <option value="arbitrator">Arbitrator</option>
-                                <option value="mediator">Mediator</option>
-                                <option value="notary">Notary</option>
-                                <option value="document-writer">Document Writer</option>
-                                <option value="legal-consultant">Legal Consultant</option>
-                            </select>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="licenseNumber">License/Registration Number *</label>
-                                <input type="text" id="licenseNumber" name="licenseNumber" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="barCouncil">Bar Council/Authority *</label>
-                                <input type="text" id="barCouncil" name="barCouncil" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="qualifications">Educational Qualifications *</label>
-                            <textarea id="qualifications" name="qualifications" rows="3" required placeholder="E.g., LLB from Delhi University, LLM from National Law School..."></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Profile Setup -->
-                    <div class="form-step" data-step="3">
-                        <h3>Profile Setup</h3>
-                        <div class="form-group">
-                            <label>Areas of Specialization *</label>
-                            <div class="checkbox-group">
-                                <label><input type="checkbox" name="specializations[]" value="civil"> Civil Law</label>
-                                <label><input type="checkbox" name="specializations[]" value="criminal"> Criminal Law</label>
-                                <label><input type="checkbox" name="specializations[]" value="family"> Family Law</label>
-                                <label><input type="checkbox" name="specializations[]" value="corporate"> Corporate Law</label>
-                                <label><input type="checkbox" name="specializations[]" value="property"> Property Law</label>
-                                <label><input type="checkbox" name="specializations[]" value="labour"> Labour Law</label>
-                                <label><input type="checkbox" name="specializations[]" value="tax"> Tax Law</label>
-                                <label><input type="checkbox" name="specializations[]" value="intellectual"> Intellectual Property</label>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="hourlyRate">Consultation Rate (₹/hour) *</label>
-                                <input type="number" id="hourlyRate" name="hourlyRate" min="500" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="languages">Languages Spoken *</label>
-                                <input type="text" id="languages" name="languages" required placeholder="Hindi, English, Tamil...">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="bio">Professional Bio *</label>
-                            <textarea id="bio" name="bio" rows="4" required placeholder="Brief description of your practice, achievements, and expertise..."></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-navigation">
-                        <button type="button" id="prevBtn" class="btn-secondary" onclick="changeStep(-1)" style="display: none;">Previous</button>
-                        <button type="button" id="nextBtn" class="btn-primary" onclick="changeStep(1)">Next Step</button>
-                        <button type="submit" id="submitBtn" class="btn-primary" style="display: none;">
-                            <i class="fas fa-rocket"></i>
-                            Complete Registration
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+    <section id="button" class="button-group">
+      <button class="btn client" onclick="window.location.href='ClientRegister.html'">
+        <i class="fa-solid fa-user"></i> Client
+      </button>
+      <button class="btn provider" onclick="window.location.href='LegalRegister.html'">
+        <i class="fa-solid fa-briefcase"></i> Service Provider
+      </button>
     </section>
+  </div>
+</section>
+        
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -763,7 +705,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-form">
+            <div class="contact-form">
                     <h3>Quick Contact</h3>
                     <form id="contact-form">
                         <div class="form-group">

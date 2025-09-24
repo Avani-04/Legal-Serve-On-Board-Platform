@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediators Scrollable Grid</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+        }
+
+        .mediators-section {
+            padding: 20px;
+            background: #fff;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* The key to 4-way sliding: */
+        .mediators-container {
+            width: 100%;
+            height: 700px;
+            overflow: auto;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .mediators-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(280px, 1fr));
+            grid-auto-rows: minmax(min-content, max-content);
+            grid-gap: 20px;
+            padding: 0 10px;
+        }
+
+        /* Profile Card Styling */
+        .mediator-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-width: 280px;
+        }
+        .mediator-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .mediator-image {
+            text-align: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .mediator-status {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: green;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .mediator-image img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .mediator-name {
+            font-size: 18px;
+            margin: 5px 0;
+            color: #333;
+        }
+        .mediator-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .mediator-info {
+            font-size: 13px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+        .info-item {
+            margin: 3px 0;
+        }
+        .specializations {
+            margin-top: auto;
+        }
+        .specializations h4 {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        .specialization-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .specialization-tag {
+            background: #eee;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        .mediator-actions {
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 3px 2px 0 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 12px;
+            transition: background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: #fff;
+        }
+        .btn-secondary {
+            background: #555;
+            color: #fff;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="mediators-section">
+        <a href="index.html#services" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+        <div class="mediators-container">
+            <div class="mediators-grid">
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmVzc2lvbmFsJTIwbWFufGVufDB8fDB8fHww" alt="Med. Rahul Kapoor">
+                    </div>
+                    <h3 class="mediator-name">Med. Rahul Kapoor</h3>
+                    <p class="mediator-title">Family & Marital Mediator</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43280</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> rahul.kapoor@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 15+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Divorce Mediation</span>
+                            <span class="specialization-tag">Child Custody</span>
+                            <span class="specialization-tag">Family Property</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543280" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://plus.unsplash.com/premium_photo-1672691612717-954cdfaaa8c5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D" alt="Med. Shreya Jain">
+                    </div>
+                    <h3 class="mediator-name">Med. Shreya Jain</h3>
+                    <p class="mediator-title">Commercial Disputes & Contracts</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bengaluru, Karnataka</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43281</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> shreya.jain@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 12+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Business Conflicts</span>
+                            <span class="specialization-tag">Contract Breaches</span>
+                            <span class="specialization-tag">Partnership Issues</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543281" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1562788869-4ed32648eb72?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cHJvZmVzc2lvbmFsJTIwbWFufGVufDB8fDB8fHww" alt="Med. Arjun Reddy">
+                    </div>
+                    <h3 class="mediator-name">Med. Arjun Reddy</h3>
+                    <p class="mediator-title">Real Estate & Construction</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Hyderabad, Telangana</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43282</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> arjun.reddy@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 20+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Land Disputes</span>
+                            <span class="specialization-tag">Builder-Buyer Issues</span>
+                            <span class="specialization-tag">Property Division</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543282" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/2162937048/photo/studio-portrait-of-asian-business-person-with-arms-crossed.webp?a=1&b=1&s=612x612&w=0&k=20&c=OwCOn4EyslQxbkCyRppCFmMPIzt3TOAGa_-3O-GRqdY=" alt="Med. Anjali Mehta">
+                    </div>
+                    <h3 class="mediator-name">Med. Anjali Mehta</h3>
+                    <p class="mediator-title">Employment & Workplace Conflict</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43283</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> anjali.mehta@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Workplace Harassment</span>
+                            <span class="specialization-tag">Termination Disputes</span>
+                            <span class="specialization-tag">Salary Issues</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543283" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://plus.unsplash.com/premium_photo-1661488774517-94ecf6cc58ff?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHByb2Zlc3Npb25hbCUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D" alt="Med. Vineet Dubey">
+                    </div>
+                    <h3 class="mediator-name">Med. Vineet Dubey</h3>
+                    <p class="mediator-title">Intellectual Property & Licensing</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43284</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> vineet.dubey@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Patent Disputes</span>
+                            <span class="specialization-tag">Trademark Infringement</span>
+                            <span class="specialization-tag">Copyright</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543284" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D" alt="Med. Kavya Sharma">
+                    </div>
+                    <h3 class="mediator-name">Med. Kavya Sharma</h3>
+                    <p class="mediator-title">Civil & Tort Law</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43285</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> kavya.sharma@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 9+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Personal Injury</span>
+                            <span class="specialization-tag">Defamation</span>
+                            <span class="specialization-tag">Negligence Cases</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543285" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1537511446984-935f663eb1f4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHByb2Zlc3Npb25hbCUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D" alt="Med. Karan Singh">
+                    </div>
+                    <h3 class="mediator-name">Med. Karan Singh</h3>
+                    <p class="mediator-title">Corporate & Financial Mediation</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43286</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> karan.singh@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 22+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Shareholder Disputes</span>
+                            <span class="specialization-tag">Loan Defaults</span>
+                            <span class="specialization-tag">Mergers & Acquisitions</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543286" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1573165850883-9b0e18c44bd2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8fDB8fHww" alt="Med. Preeti Rao">
+                    </div>
+                    <h3 class="mediator-name">Med. Preeti Rao</h3>
+                    <p class="mediator-title">Healthcare & Medical Disputes</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kolkata, West Bengal</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43287</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> preeti.rao@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 18+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Medical Malpractice</span>
+                            <span class="specialization-tag">Patient-Doctor Issues</span>
+                            <span class="specialization-tag">Hospital Billing</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543287" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHByb2Zlc3Npb25hbCUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D" alt="Med. Akash Verma">
+                    </div>
+                    <h3 class="mediator-name">Med. Akash Verma</h3>
+                    <p class="mediator-title">Technology & IT Law</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bengaluru, Karnataka</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43288</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> akash.verma@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Software Licensing</span>
+                            <span class="specialization-tag">Data Privacy</span>
+                            <span class="specialization-tag">Cybercrime</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543288" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://plus.unsplash.com/premium_photo-1681489930334-b0d26fdb9ed8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8fDB8fHww" alt="Med. Pooja Sharma">
+                    </div>
+                    <h3 class="mediator-name">Med. Pooja Sharma</h3>
+                    <p class="mediator-title">Civil & Community Disputes</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43289</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> pooja.sharma@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 16+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Neighbor Disputes</span>
+                            <span class="specialization-tag">Public Policy</span>
+                            <span class="specialization-tag">Civil Rights</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543289" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1495603889488-42d1d66e5523?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHByb2Zlc3Npb25hbCUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D" alt="Med. Rohan Malhotra">
+                    </div>
+                    <h3 class="mediator-name">Med. Rohan Malhotra</h3>
+                    <p class="mediator-title">International Trade & Maritime</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43290</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> rohan.malhotra@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 20+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Import/Export Disputes</span>
+                            <span class="specialization-tag">Shipping Contracts</span>
+                            <span class="specialization-tag">Cross-Border Trade</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543290" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1507206130118-b5907f817163?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHByb2Zlc3Npb25hbCUyMHdvbWFufGVufDB8fDB8fHww" alt="Med. Sunita Patil">
+                    </div>
+                    <h3 class="mediator-name">Med. Sunita Patil</h3>
+                    <p class="mediator-title">Environmental & Energy Law</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43291</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> sunita.patil@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 19+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Pollution Disputes</span>
+                            <span class="specialization-tag">Renewable Energy Projects</span>
+                            <span class="specialization-tag">Natural Resources</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543291" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://images.unsplash.com/photo-1589386417686-0d34b5903d23?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHByb2Zlc3Npb25hbCUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D" alt="Med. Farhan Ahmed">
+                    </div>
+                    <h3 class="mediator-name">Med. Farhan Ahmed</h3>
+                    <p class="mediator-title">Sports & Entertainment Law</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43292</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> farhan.ahmed@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 11+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Player Contracts</span>
+                            <span class="specialization-tag">Copyright Issues</span>
+                            <span class="specialization-tag">Event Disputes</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543292" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/2162095372/photo/woman-portrait-and-happy-in-office-with-arms-crossed-fashion-mogul-and-pride-with.webp?a=1&b=1&s=612x612&w=0&k=20&c=PKx9Y48TC3V_RKQs4HGVKz74MtQAnSZ0yADKJjYOVTs=" alt="Med. Disha Choudhury">
+                    </div>
+                    <h3 class="mediator-name">Med. Disha Choudhury</h3>
+                    <p class="mediator-title">Banking & Financial Services</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kolkata, West Bengal</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43293</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> disha.choudhury@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 17+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Loan Disputes</span>
+                            <span class="specialization-tag">Mortgage Issues</span>
+                            <span class="specialization-tag">Investment Fraud</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543293" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+
+                <div class="mediator-card">
+                    <div class="mediator-image">
+                        <div class="mediator-status">Available</div>
+                        <img src="https://media.istockphoto.com/id/2160473960/photo/happy-satisfied-math-teacher-in-elementary-class.webp?a=1&b=1&s=612x612&w=0&k=20&c=88SRHMeAozO221getjzwDbXMBKHyYN7qEbGWTZPHV7A=" alt="Med. Sameer Malik">
+                    </div>
+                    <h3 class="mediator-name">Med. Sameer Malik</h3>
+                    <p class="mediator-title">Consumer Protection Law</p>
+                    <div class="mediator-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bengaluru, Karnataka</div>
+                        <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43294</div>
+                        <div class="info-item"><i class="fas fa-envelope"></i> sameer.malik@mediationhub.in</div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i> 13+ Years Experience</div>
+                    </div>
+                    <div class="specializations">
+                        <h4>Specializations:</h4>
+                        <div class="specialization-tags">
+                            <span class="specialization-tag">Defective Products</span>
+                            <span class="specialization-tag">Service Disputes</span>
+                            <span class="specialization-tag">Consumer Fraud</span>
+                        </div>
+                    </div>
+                    <div class="mediator-actions">
+                        <a href="tel:+919876543294" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                        <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.height, rect.width);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+</body>
+</html>

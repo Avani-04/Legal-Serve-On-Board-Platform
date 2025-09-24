@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="LegalRegister.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body> 
+<!-- Onboarding Form Section -->
+    <section id="onboard" class="onboarding">
+        <div class="container">
+            <div class="onboard-header">
+                <h2>Join LegalConnect India Today</h2>
+                <p>Complete your registration in just 3 simple steps and start earning within 24 hours</p>
+            </div>
+            <div class="onboard-container">
+                <div class="onboard-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-info">
+                            <h3>Basic Information</h3>
+                            <p>Your personal and professional details</p>
+                        </div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-info">
+                            <h3>Professional Verification</h3>
+                            <p>License and certification details</p>
+                        </div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-info">
+                            <h3>Profile Setup</h3>
+                            <p>Specializations and service areas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="onboard-form" class="onboard-form">
+                    <!-- Step 1: Basic Information -->
+                    <div class="form-step active" data-step="1">
+                        <h3>Basic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="experience">Years of Experience *</label>
+                                <select id="experience" name="experience" required>
+                                    <option value="">Select Experience</option>
+                                    <option value="0-2">0-2 years</option>
+                                    <option value="3-5">3-5 years</option>
+                                    <option value="6-10">6-10 years</option>
+                                    <option value="11-15">11-15 years</option>
+                                    <option value="15+">15+ years</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Current City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Professional Verification -->
+                    <div class="form-step" data-step="2">
+                        <h3>Professional Verification</h3>
+                        <div class="form-group">
+                            <label for="profession">Primary Profession *</label>
+                            <select id="profession" name="profession" required>
+                                <option value="">Select Profession</option>
+                                <option value="advocate">Advocate/Lawyer</option>
+                                <option value="arbitrator">Arbitrator</option>
+                                <option value="mediator">Mediator</option>
+                                <option value="notary">Notary</option>
+                                <option value="document-writer">Document Writer</option>
+                                <option value="legal-consultant">Legal Consultant</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="licenseNumber">License/Registration Number *</label>
+                                <input type="text" id="licenseNumber" name="licenseNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="barCouncil">Bar Council/Authority *</label>
+                                <input type="text" id="barCouncil" name="barCouncil" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="qualifications">Educational Qualifications *</label>
+                            <textarea id="qualifications" name="qualifications" rows="3" required placeholder="E.g., LLB from Delhi University, LLM from National Law School..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Profile Setup -->
+                    <div class="form-step" data-step="3">
+                        <h3>Profile Setup</h3>
+                        <div class="form-group">
+                            <label>Areas of Specialization *</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="specializations[]" value="civil"> Civil Law</label>
+                                <label><input type="checkbox" name="specializations[]" value="criminal"> Criminal Law</label>
+                                <label><input type="checkbox" name="specializations[]" value="family"> Family Law</label>
+                                <label><input type="checkbox" name="specializations[]" value="corporate"> Corporate Law</label>
+                                <label><input type="checkbox" name="specializations[]" value="property"> Property Law</label>
+                                <label><input type="checkbox" name="specializations[]" value="labour"> Labour Law</label>
+                                <label><input type="checkbox" name="specializations[]" value="tax"> Tax Law</label>
+                                <label><input type="checkbox" name="specializations[]" value="intellectual"> Intellectual Property</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hourlyRate">Consultation Rate (₹/hour) *</label>
+                                <input type="number" id="hourlyRate" name="hourlyRate" min="500" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="languages">Languages Spoken *</label>
+                                <input type="text" id="languages" name="languages" required placeholder="Hindi, English, Tamil...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bio">Professional Bio *</label>
+                            <textarea id="bio" name="bio" rows="4" required placeholder="Brief description of your practice, achievements, and expertise..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" id="prevBtn" class="btn-secondary" onclick="changeStep(-1)" style="display: none;">Previous</button>
+                        <button type="button" id="nextBtn" class="btn-primary" onclick="changeStep(1)">Next Step</button>
+                        <button type="submit" id="submitBtn" class="btn-primary" style="display: none;">
+                            <i class="fas fa-rocket"></i>
+                            Complete Registration
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Multi-step Form Functionality
+let currentStep = 1;
+const totalSteps = 3;
+
+// Initialize form when DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+    showStep(currentStep);
+    setupFormValidation();
+    setupFormSubmission();
+});
+
+// Change step function
+function changeStep(direction) {
+    if (direction === 1) {
+        // Moving to next step - validate current step
+        if (!validateStep(currentStep)) {
+            return; // Don't proceed if validation fails
+        }
+        
+        if (currentStep < totalSteps) {
+            currentStep++;
+        }
+    } else {
+        // Moving to previous step
+        if (currentStep > 1) {
+            currentStep--;
+        }
+    }
+    
+    showStep(currentStep);
+}
+
+// Show specific step
+function showStep(step) {
+    // Hide all form steps
+    const formSteps = document.querySelectorAll('.form-step');
+    formSteps.forEach(formStep => {
+        formStep.classList.remove('active');
+    });
+    
+    // Show current step
+    const currentFormStep = document.querySelector(`[data-step="${step}"]`);
+    if (currentFormStep && currentFormStep.classList.contains('form-step')) {
+        currentFormStep.classList.add('active');
+    }
+    
+    // Update step indicators
+    const stepIndicators = document.querySelectorAll('.step');
+    stepIndicators.forEach((indicator, index) => {
+        if (index + 1 <= step) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
+    });
+    
+    // Update navigation buttons
+    updateNavigationButtons();
+}
+
+// Update navigation button visibility
+function updateNavigationButtons() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Previous button
+    if (currentStep === 1) {
+        prevBtn.style.display = 'none';
+    } else {
+        prevBtn.style.display = 'inline-flex';
+    }
+    
+    // Next/Submit button
+    if (currentStep === totalSteps) {
+        nextBtn.style.display = 'none';
+        submitBtn.style.display = 'inline-flex';
+    } else {
+        nextBtn.style.display = 'inline-flex';
+        submitBtn.style.display = 'none';
+    }
+}
+
+// Validate current step
+function validateStep(step) {
+    const currentFormStep = document.querySelector(`.form-step[data-step="${step}"]`);
+    const requiredFields = currentFormStep.querySelectorAll('[required]');
+    let isValid = true;
+    
+    // Clear previous error messages
+    clearErrorMessages(currentFormStep);
+    
+    requiredFields.forEach(field => {
+        if (!validateField(field)) {
+            isValid = false;
+        }
+    });
+    
+    // Special validation for step 3 (specializations)
+    if (step === 3) {
+        const specializations = document.querySelectorAll('input[name="specializations[]"]:checked');
+        if (specializations.length === 0) {
+            showFieldError(document.querySelector('.checkbox-group'), 'Please select at least one specialization');
+            isValid = false;
+        }
+    }
+    
+    return isValid;
+}
+
+// Validate individual field
+function validateField(field) {
+    const value = field.value.trim();
+    let isValid = true;
+    let errorMessage = '';
+    
+    // Check if required field is empty
+    if (field.hasAttribute('required') && !value) {
+        errorMessage = 'This field is required';
+        isValid = false;
+    }
+    
+    // Email validation
+    else if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            errorMessage = 'Please enter a valid email address';
+            isValid = false;
+        }
+    }
+    
+    // Phone validation
+    else if (field.type === 'tel' && value) {
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(value.replace(/\D/g, ''))) {
+            errorMessage = 'Please enter a valid 10-digit phone number';
+            isValid = false;
+        }
+    }
+    
+    // Number validation for hourly rate
+    else if (field.type === 'number' && field.name === 'hourlyRate' && value) {
+        if (parseInt(value) < 500) {
+            errorMessage = 'Minimum rate should be ₹500/hour';
+            isValid = false;
+        }
+    }
+    
+    // Show validation result
+    if (isValid) {
+        field.classList.remove('error');
+        field.classList.add('success');
+        removeFieldError(field);
+    } else {
+        field.classList.remove('success');
+        field.classList.add('error');
+        showFieldError(field, errorMessage);
+    }
+    
+    return isValid;
+}
+
+// Show field error
+function showFieldError(field, message) {
+    // Remove existing error message
+    removeFieldError(field);
+    
+    // Create error message element
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+    
+    // Insert error message after the field
+    const parent = field.closest('.form-group') || field.parentNode;
+    parent.appendChild(errorDiv);
+}
+
+// Remove field error
+function removeFieldError(field) {
+    const parent = field.closest('.form-group') || field.parentNode;
+    const existingError = parent.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+}
+
+// Clear all error messages in a container
+function clearErrorMessages(container) {
+    const errorMessages = container.querySelectorAll('.error-message');
+    errorMessages.forEach(msg => msg.remove());
+    
+    const errorFields = container.querySelectorAll('.error');
+    errorFields.forEach(field => field.classList.remove('error'));
+}
+
+// Setup real-time validation
+function setupFormValidation() {
+    const allFields = document.querySelectorAll('input, select, textarea');
+    
+    allFields.forEach(field => {
+        // Validate on blur (when field loses focus)
+        field.addEventListener('blur', function() {
+            if (this.value.trim()) {
+                validateField(this);
+            }
+        });
+        
+        // Clear error on focus
+        field.addEventListener('focus', function() {
+            this.classList.remove('error');
+            removeFieldError(this);
+        });
+        
+        // Real-time validation for certain fields
+        if (field.type === 'email' || field.type === 'tel') {
+            field.addEventListener('input', function() {
+                if (this.value.trim().length > 3) {
+                    validateField(this);
+                }
+            });
+        }
+    });
+    
+    // Handle checkbox validation
+    const specializationCheckboxes = document.querySelectorAll('input[name="specializations[]"]');
+    specializationCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const checkedBoxes = document.querySelectorAll('input[name="specializations[]"]:checked');
+            const checkboxGroup = document.querySelector('.checkbox-group');
+            
+            if (checkedBoxes.length > 0) {
+                checkboxGroup.classList.remove('error');
+                removeFieldError(checkboxGroup);
+            }
+        });
+    });
+}
+
+// Setup form submission
+function setupFormSubmission() {
+    const form = document.getElementById('onboard-form');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate all steps
+        let allValid = true;
+        for (let i = 1; i <= totalSteps; i++) {
+            if (!validateStep(i)) {
+                allValid = false;
+                // Go to first invalid step
+                if (currentStep !== i) {
+                    currentStep = i;
+                    showStep(currentStep);
+                }
+                break;
+            }
+        }
+        
+        if (allValid) {
+            submitForm();
+        }
+    });
+}
+
+// Submit form
+function submitForm() {
+    const submitBtn = document.getElementById('submitBtn');
+    const originalText = submitBtn.innerHTML;
+    
+    // Show loading state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+    
+    // Collect form data
+    const formData = new FormData(document.getElementById('onboard-form'));
+    
+    // Get specializations
+    const specializations = [];
+    document.querySelectorAll('input[name="specializations[]"]:checked').forEach(checkbox => {
+        specializations.push(checkbox.value);
+    });
+    
+    // Create final data object
+    const profileData = {
+        fullName: formData.get('fullName'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        experience: formData.get('experience'),
+        city: formData.get('city'),
+        profession: formData.get('profession'),
+        licenseNumber: formData.get('licenseNumber'),
+        barCouncil: formData.get('barCouncil'),
+        qualifications: formData.get('qualifications'),
+        specializations: specializations,
+        hourlyRate: formData.get('hourlyRate'),
+        languages: formData.get('languages'),
+        bio: formData.get('bio')
+    };
+    
+    // Simulate API call
+    setTimeout(() => {
+        // Success simulation
+        showSuccessMessage();
+        console.log('Profile Data:', profileData);
+        
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        
+        // In a real application, you would redirect to dashboard or show success page
+        // window.location.href = '/professional-dashboard';
+        
+    }, 2000);
+}
+
+// Show success message
+function showSuccessMessage() {
+    // Create success overlay
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+    `;
+    
+    const successCard = document.createElement('div');
+    successCard.style.cssText = `
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 400px;
+        margin: 20px;
+    `;
+    
+    successCard.innerHTML = `
+        <div style="color: #10b981; font-size: 4rem; margin-bottom: 20px;">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2 style="color: #2d3748; margin-bottom: 15px;">Registration Successful!</h2>
+        <p style="color: #6c757d; margin-bottom: 25px;">
+            Your profile has been submitted for review. You'll receive an email confirmation shortly.
+        </p>
+        <button onclick="this.closest('.success-overlay').remove()" 
+                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                       color: white; border: none; padding: 12px 24px; 
+                       border-radius: 10px; cursor: pointer; font-weight: 600;">
+            Continue to Dashboard
+        </button>
+    `;
+    
+    overlay.className = 'success-overlay';
+    overlay.appendChild(successCard);
+    document.body.appendChild(overlay);
+}
+
+// Format phone number as user types
+document.addEventListener('DOMContentLoaded', function() {
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length <= 10) {
+                this.value = value;
+            }
+        });
+    }
+});
+
+// Auto-resize textareas
+document.addEventListener('DOMContentLoaded', function() {
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+    });
+});
+    </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const clientBtn = document.querySelector("#button button:first-child");
+    const serviceBtn = document.querySelector("#button button:last-child");
+    const formSection = document.getElementById("onboard");
+
+    // Client button clicked
+    clientBtn.addEventListener("click", function () {
+        alert("Client registration form coming soon!"); 
+        // OR redirect to client form page
+        // window.location.href = "client-form.html";
+    });
+
+    // Service Provider button clicked
+    serviceBtn.addEventListener("click", function () {
+        formSection.style.display = "block"; // show form
+        document.getElementById("button").style.display = "none"; // hide buttons
+    });
+});
+</script>
+
+
+    </body>
+    </html>
+

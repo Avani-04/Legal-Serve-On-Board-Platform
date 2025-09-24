@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arbitrators Slider</title>
+  <title>Arbitrators Scrollable Grid</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
@@ -14,300 +14,546 @@
     }
 
     .arbitrators-section {
-      padding: 40px 20px;
+      padding: 20px;
       background: #fff;
     }
 
     .back-link {
       display: inline-block;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       text-decoration: none;
       color: #333;
       font-weight: bold;
     }
 
-    .arbitrators-slider {
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding: 10px 0;
+    /* The key to 4-way sliding: */
+    .arbitrators-container {
+      width: 100%;
+      height: 700px; /* Set a fixed height for vertical scrolling */
+      overflow: auto;
+      padding: 10px;
+      box-sizing: border-box;
     }
 
-    .arbitrators-track {
-      display: flex;
-      gap: 20px;
+    .arbitrators-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(280px, 1fr)); /* 7 profiles per row */
+      grid-auto-rows: minmax(min-content, max-content);
+      grid-gap: 20px;
+      padding: 0 10px;
     }
 
+    /* Profile Card Styling */
     .arbitrator-card {
-      flex: 0 0 auto;
-      width: 300px;
       background: #fff;
       border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      scroll-snap-align: start;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
-    }
-
-    .arbitrator-image {
-      text-align: center;
-      margin-bottom: 15px;
-      position: relative;
-    }
-
-    .arbitrator-status {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background: green;
-      color: #fff;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-    }
-
-    .arbitrator-photo {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 10px;
-    }
-
-    .arbitrator-name {
-      font-size: 18px;
-      margin: 5px 0;
-      color: #333;
-    }
-
-    .arbitrator-title {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .arbitrator-info {
-      font-size: 14px;
-      color: #444;
-      margin-bottom: 15px;
-    }
-
-    .info-item {
-      margin: 5px 0;
-    }
-
-    .specializations h4 {
-      margin-bottom: 5px;
-      font-size: 14px;
-      color: #333;
-    }
-
-    .specialization-tags {
       display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
+      flex-direction: column;
+      min-width: 280px;
     }
+    .arbitrator-card:hover { transform: translateY(-5px) scale(1.02); }
 
-    .specialization-tag {
-      background: #eee;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 12px;
-    }
-
-    .arbitrator-actions {
-      margin-top: 15px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 8px 12px;
-      margin: 5px 3px 0 0;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: background 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary {
-      background: #007bff;
-      color: #fff;
-    }
-
-    .btn-secondary {
-      background: #555;
-      color: #fff;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .slider-controls {
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    .slider-controls button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      margin: 0 5px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.6);
-      transform: scale(0);
-      animation: ripple-animation 0.6s linear;
-      pointer-events: none;
-    }
-
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
+    .arbitrator-image { text-align: center; margin-bottom: 10px; position: relative; }
+    .arbitrator-status { position: absolute; top: -8px; right: -8px; background: green; color: #fff; padding: 4px 8px; border-radius: 20px; font-size: 12px; }
+    .arbitrator-image img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+    .arbitrator-name { font-size: 18px; margin: 5px 0; color: #333; }
+    .arbitrator-title { font-size: 14px; color: #555; margin-bottom: 8px; }
+    .arbitrator-info { font-size: 13px; color: #444; margin-bottom: 10px; }
+    .info-item { margin: 3px 0; }
+    .specializations { margin-top: auto; }
+    .specializations h4 { margin-bottom: 5px; font-size: 14px; color: #333; }
+    .specialization-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .specialization-tag { background: #eee; padding: 3px 6px; border-radius: 6px; font-size: 12px; }
+    .arbitrator-actions { margin-top: 10px; }
+    .btn { display: inline-block; padding: 8px 12px; margin: 3px 2px 0 0; border-radius: 8px; text-decoration: none; font-size: 12px; transition: background 0.3s; position: relative; overflow: hidden; }
+    .btn-primary { background: #007bff; color: #fff; }
+    .btn-secondary { background: #555; color: #fff; }
+    .btn:hover { opacity: 0.9; }
+    .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.6); transform: scale(0); animation: ripple-animation 0.6s linear; pointer-events: none; }
+    @keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }
   </style>
 </head>
 <body>
-  <!-- Arbitrators Section -->
   <section class="arbitrators-section">
-    <div class="container">
-      <a href="index.html#services" class="back-link">
-        <i class="fas fa-arrow-left"></i>
-        Back to Services
-      </a>
-
-      <div class="arbitrators-slider">
-        <div class="arbitrators-track">
-
-          <!-- Arbitrator 1 -->
-          <div class="arbitrator-card">
-            <div class="arbitrator-image">
-              <div class="arbitrator-status">Available</div>
-              <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Arb. Rajiv Mehta" class="arbitrator-photo">
+    <a href="Services.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+    <div class="arbitrators-container">
+      <div class="arbitrators-grid">
+        
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuPqnYLCbjlsSunMMjt-2gGglVS_aq-QKxZA&s" alt="Arb. Ananya Rao">
+          </div>
+          <h3 class="arbitrator-name">Arb. Ananya Rao</h3>
+          <p class="arbitrator-title">Commercial Arbitration Specialist</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43250</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> ananya.rao@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 15+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Commercial Disputes</span>
+              <span class="specialization-tag">Contract Arbitration</span>
+              <span class="specialization-tag">Mediation</span>
             </div>
-            <div class="arbitrator-content">
-              <h3 class="arbitrator-name">Arb. Rajiv Mehta</h3>
-              <p class="arbitrator-title">Commercial Arbitration Expert</p>
-              <div class="arbitrator-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 50010</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> rajiv.mehta@legalconnect.in</div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543250" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+       
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTat5u-0lGkprI__MWpQR_UTLBvzVcxx6vUWA&s" alt="Arb. Meera Iyer">
+          </div>
+          <h3 class="arbitrator-name">Arb. Meera Iyer</h3>
+          <p class="arbitrator-title">Family & Commercial Arbitration</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bengaluru, Karnataka</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43252</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> meera.iyer@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 12+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Family Disputes</span>
+              <span class="specialization-tag">Divorce Arbitration</span>
+              <span class="specialization-tag">Mediation</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543252" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://images.pexels.com/photos/1553783/pexels-photo-1553783.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Arb. Sameer Khan">
+          </div>
+          <h3 class="arbitrator-name">Arb. Sameer Khan</h3>
+          <p class="arbitrator-title">Real Estate & Property Arbitrator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43253</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> sameer.khan@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 20+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Property Disputes</span>
+              <span class="specialization-tag">Construction Arbitration</span>
+              <span class="specialization-tag">Real Estate</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543253" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://images.pexels.com/photos/3771077/pexels-photo-3771077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Arb. Priya Sharma">
+          </div>
+          <h3 class="arbitrator-name">Arb. Priya Sharma</h3>
+          <p class="arbitrator-title">Employment Law Mediator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43254</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> priya.sharma@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Employment Disputes</span>
+              <span class="specialization-tag">Workplace Conflict</span>
+              <span class="specialization-tag">HR Mediation</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543254" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://t4.ftcdn.net/jpg/05/23/62/91/240_F_523629123_RpAModBJXgCTPfilfYaCIbPaalFIjbvv.jpg" alt="Arb. Rohan Mehta">
+          </div>
+          <h3 class="arbitrator-name">Arb. Rohan Mehta</h3>
+          <p class="arbitrator-title">Intellectual Property Rights Arbitrator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Hyderabad, Telangana</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43255</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> rohan.mehta@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Copyright</span>
+              <span class="specialization-tag">Trademark</span>
+              <span class="specialization-tag">Patent Disputes</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543255" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcpwmaKt3IynGfqr1u_OTKm_-RTJoigLK1ow&s" alt="Arb. Aditi Singh">
+          </div>
+          <h3 class="arbitrator-name">Arb. Aditi Singh</h3>
+          <p class="arbitrator-title">Civil & Family Dispute Arbitrator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43256</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> aditi.singh@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 9+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Civil Disputes</span>
+              <span class="specialization-tag">Family Mediation</span>
+              <span class="specialization-tag">Inheritance Issues</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543256" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://t4.ftcdn.net/jpg/06/48/39/19/240_F_648391979_uMz6EwAlKNIJnK9r46UpTiM17nT8GuLl.jpg" alt="Arb. Vikram Patil">
+          </div>
+          <h3 class="arbitrator-name">Arb. Vikram Patil</h3>
+          <p class="arbitrator-title">Corporate & Financial Arbitrator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43257</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> vikram.patil@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 22+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Corporate Law</span>
+              <span class="specialization-tag">Financial Disputes</span>
+              <span class="specialization-tag">Partnership Disputes</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543257" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+
+        
+        
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://t4.ftcdn.net/jpg/07/38/20/61/240_F_738206189_DCSgfApaqViBrwdJrOE0titJH7KjctEt.jpg" alt="Arb. Gautam Bose">
+          </div>
+          <h3 class="arbitrator-name">Arb. Gautam Bose</h3>
+          <p class="arbitrator-title">Mergers & Acquisitions Arbitrator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43265</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> gautam.bose@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 20+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Mergers & Acquisitions</span>
+              <span class="specialization-tag">Corporate Governance</span>
+              <span class="specialization-tag">Joint Ventures</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543265" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://sp.yimg.com/ib/th/id/OIP.0lc-BApJBIsCx7CeU7rNrgHaKX?pid=Api&w=148&h=148&c=7&dpr=2&rs=1" alt="Arb. Simran Kaur">
+          </div>
+          <h3 class="arbitrator-name">Arb. Simran Kaur</h3>
+          <p class="arbitrator-title">Energy and Power Arbitrator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Chandigarh, Punjab</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43266</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> simran.kaur@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Power Projects</span>
+              <span class="specialization-tag">Energy Contracts</span>
+              <span class="specialization-tag">Renewable Energy</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543266" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://images.pexels.com/photos/3777569/pexels-photo-3777569.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Arb. Rajesh Gupta">
+          </div>
+          <h3 class="arbitrator-name">Arb. Rajesh Gupta</h3>
+          <p class="arbitrator-title">Civil & Construction Arbitrator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43267</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> rajesh.gupta@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 22+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Construction Disputes</span>
+              <span class="specialization-tag">Real Estate</span>
+              <span class="specialization-tag">Contract Laws</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543267" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://images.pexels.com/photos/3777571/pexels-photo-3777571.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Arb. Aamir Hussain">
+          </div>
+          <h3 class="arbitrator-name">Arb. Aamir Hussain</h3>
+          <p class="arbitrator-title">International Trade & Maritime Law</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43269</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> aamir.hussain@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 20+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Maritime Disputes</span>
+              <span class="specialization-tag">Cross-border Trade</span>
+              <span class="specialization-tag">International Contracts</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543269" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVwKlO17QtTZbPn3JhesBSk4t3cLj3gx_5AQ&s" alt="Arb. Kavita Singh">
+          </div>
+          <h3 class="arbitrator-name">Arb. Kavita Singh</h3>
+          <p class="arbitrator-title">Environmental Law & Policy</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bhopal, Madhya Pradesh</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43270</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> kavita.singh@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 18+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Environmental Disputes</span>
+              <span class="specialization-tag">Pollution Control</span>
+              <span class="specialization-tag">Renewable Energy</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543270" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+          <div class="arbitrator-image">
+            <div class="arbitrator-status">Available</div>
+            <img src="https://images.pexels.com/photos/3777573/pexels-photo-3777573.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Arb. Sandeep Deshmukh">
+          </div>
+          <h3 class="arbitrator-name">Arb. Sandeep Deshmukh</h3>
+          <p class="arbitrator-title">Intellectual Property Rights Arbitrator</p>
+          <div class="arbitrator-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43271</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> sandeep.deshmukh@arbitrationhub.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Trademark Disputes</span>
+              <span class="specialization-tag">Patent Infringement</span>
+              <span class="specialization-tag">Copyright Law</span>
+            </div>
+          </div>
+          <div class="arbitrator-actions">
+            <a href="tel:+919876543271" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+            <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+          </div>
+        </div>
+
+        <div class="arbitrator-card">
+            <div class="arbitrator-image">
+                <div class="arbitrator-status">Available</div>
+                <img src="https://images.pexels.com/photos/3777574/pexels-photo-3777574.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Arb. Rohit Sharma">
+            </div>
+            <h3 class="arbitrator-name">Arb. Rohit Sharma</h3>
+            <p class="arbitrator-title">Cybersecurity Disputes</p>
+            <div class="arbitrator-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43272</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> rohit.sharma@arbitrationhub.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+            </div>
+            <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                    <span class="specialization-tag">Data Breach</span>
+                    <span class="specialization-tag">Cybercrime</span>
+                    <span class="specialization-tag">Digital Forensics</span>
+                </div>
+            </div>
+            <div class="arbitrator-actions">
+                <a href="tel:+919876543272" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+            </div>
+        </div>
+        
+        <div class="arbitrator-card">
+            <div class="arbitrator-image">
+                <div class="arbitrator-status">Available</div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWm3n027YKELL9Jca7fPd-2-sKFNyfgwy_VA&s" alt="Arb. Sneha Singhania">
+            </div>
+            <h3 class="arbitrator-name">Arb. Sneha Singhania</h3>
+            <p class="arbitrator-title">Commercial Real Estate</p>
+            <div class="arbitrator-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, India</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43273</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> sneha.singhania@arbitrationhub.in</div>
                 <div class="info-item"><i class="fas fa-graduation-cap"></i> 18+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (230 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Expertise:</h4>
-                <div class="specialization-tags">
-                  <span class="specialization-tag">Commercial Disputes</span>
-                  <span class="specialization-tag">Cross-Border Arbitration</span>
-                  <span class="specialization-tag">Mediation</span>
-                </div>
-              </div>
-              <div class="arbitrator-actions">
-                <a href="tel:+919876550010" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Session</a>
-              </div>
             </div>
-          </div>
+            <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                    <span class="specialization-tag">Commercial Leases</span>
+                    <span class="specialization-tag">Property Rights</span>
+                    <span class="specialization-tag">Land Disputes</span>
+                </div>
+            </div>
+            <div class="arbitrator-actions">
+                <a href="tel:+919876543273" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+            </div>
+        </div>
 
-          <!-- Arbitrator 2 -->
-          <div class="arbitrator-card">
-            <div class="arbitrator-image">
-              <div class="arbitrator-status">Available</div>
-              <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="Arb. Kavita Rao" class="arbitrator-photo">
-            </div>
-            <div class="arbitrator-content">
-              <h3 class="arbitrator-name">Arb. Kavita Rao</h3>
-              <p class="arbitrator-title">International Arbitration Specialist</p>
-              <div class="arbitrator-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 50011</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> kavita.rao@legalconnect.in</div>
-                <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (198 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Expertise:</h4>
-                <div class="specialization-tags">
-                  <span class="specialization-tag">International Disputes</span>
-                  <span class="specialization-tag">Energy Arbitration</span>
-                  <span class="specialization-tag">Treaty Arbitration</span>
-                </div>
-              </div>
-              <div class="arbitrator-actions">
-                <a href="tel:+919876550011" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Session</a>
-              </div>
-            </div>
-          </div>
 
-          <!-- Arbitrator 3 -->
-          <div class="arbitrator-card">
+
+
+        <div class="arbitrator-card">
             <div class="arbitrator-image">
-              <div class="arbitrator-status">Available</div>
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Arb. Sameer Kulkarni" class="arbitrator-photo">
+                <div class="arbitrator-status">Available</div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE8y50Dr30jBvouA8SN75ulmi80w3aI-Ssgw&s" alt="Arb. Sweta Sharma">
             </div>
-            <div class="arbitrator-content">
-              <h3 class="arbitrator-name">Arb. Sameer Kulkarni</h3>
-              <p class="arbitrator-title">Construction & Infrastructure Arbitrator</p>
-              <div class="arbitrator-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 50012</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> sameer.kulkarni@legalconnect.in</div>
-                <div class="info-item"><i class="fas fa-graduation-cap"></i> 16+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (175 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Expertise:</h4>
+            <h3 class="arbitrator-name">Arb. Sweta Sharma</h3>
+            <p class="arbitrator-title">Financial Market Disputes</p>
+            <div class="arbitrator-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Hyderabad, India</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43277</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> sweta.sharma@arbitrationhub.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 19+ Years Experience</div>
+            </div>
+            <div class="specializations">
+                <h4>Specializations:</h4>
                 <div class="specialization-tags">
-                  <span class="specialization-tag">Construction Disputes</span>
-                  <span class="specialization-tag">Infrastructure Arbitration</span>
-                  <span class="specialization-tag">Contractual Issues</span>
+                    <span class="specialization-tag">Derivatives Law</span>
+                    <span class="specialization-tag">Securities Law</span>
+                    <span class="specialization-tag">Stock Market Fraud</span>
                 </div>
-              </div>
-              <div class="arbitrator-actions">
-                <a href="tel:+919876550012" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Session</a>
-              </div>
             </div>
-          </div>
+            <div class="arbitrator-actions">
+                <a href="tel:+919876543277" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+            </div>
+        </div>
+
+        <div class="arbitrator-card">
+            <div class="arbitrator-image">
+                <div class="arbitrator-status">Available</div>
+                <img src="https://images.pexels.com/photos/3777580/pexels-photo-3777580.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Arb. Gautam Srivastav">
+            </div>
+            <h3 class="arbitrator-name">Arb. Gautam Srivastav</h3>
+            <p class="arbitrator-title">Inheritance & Estate Disputes</p>
+            <div class="arbitrator-info">
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
+                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43278</div>
+                <div class="info-item"><i class="fas fa-envelope"></i> gautam.srivastav@arbitrationhub.in</div>
+                <div class="info-item"><i class="fas fa-graduation-cap"></i> 20+ Years Experience</div>
+            </div>
+            <div class="specializations">
+                <h4>Specializations:</h4>
+                <div class="specialization-tags">
+                    <span class="specialization-tag">Will Disputes</span>
+                    <span class="specialization-tag">Family Property</span>
+                    <span class="specialization-tag">Succession Law</span>
+                </div>
+            </div>
+            <div class="arbitrator-actions">
+                <a href="tel:+919876543278" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+            </div>
+        </div>
 
         </div>
-      </div>
-
-      <!-- Controls -->
-      <div class="slider-controls">
-        <button id="prevBtn">← Prev</button>
-        <button id="nextBtn">Next →</button>
-      </div>
     </div>
   </section>
 
   <script>
-    // Hover effect
-    document.querySelectorAll('.arbitrator-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-      });
-    });
-
-    // Ripple effect
     document.querySelectorAll('.btn').forEach(button => {
       button.addEventListener('click', function(e) {
         const ripple = document.createElement('span');
@@ -322,15 +568,6 @@
         this.appendChild(ripple);
         setTimeout(() => ripple.remove(), 600);
       });
-    });
-
-    // Slider buttons
-    const slider = document.querySelector('.arbitrators-slider');
-    document.getElementById('prevBtn').addEventListener('click', () => {
-      slider.scrollBy({ left: -320, behavior: 'smooth' });
-    });
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      slider.scrollBy({ left: 320, behavior: 'smooth' });
     });
   </script>
 </body>

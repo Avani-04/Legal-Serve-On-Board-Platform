@@ -3,405 +3,531 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advocates Slider</title>
+  <title>Advocates Grid Slider</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-    }
-
-    .advocates-section {
-      padding: 40px 20px;
-      background: #fff;
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 20px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-
-    .advocates-slider {
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding: 10px 0;
-    }
-
-    .advocates-track {
-      display: flex;
-      gap: 20px;
-    }
-
-    .advocate-card {
-      flex: 0 0 auto;
-      width: 300px;
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      scroll-snap-align: start;
-      transition: transform 0.3s ease;
-    }
-
-    .advocate-image {
-      text-align: center;
-      margin-bottom: 15px;
-      position: relative;
-    }
-
-    .advocate-status {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      background: green;
-      color: #fff;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-    }
-
-    .placeholder-icon {
-      font-size: 50px;
-      color: #777;
-    }
-
-    .advocate-name {
-      font-size: 18px;
-      margin: 5px 0;
-      color: #333;
-    }
-
-    .advocate-title {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .advocate-info {
-      font-size: 14px;
-      color: #444;
-      margin-bottom: 15px;
-    }
-
-    .info-item {
-      margin: 5px 0;
-    }
-
-    .specializations h4 {
-      margin-bottom: 5px;
-      font-size: 14px;
-      color: #333;
-    }
-
-    .specialization-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .specialization-tag {
-      background: #eee;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 12px;
-    }
-
-    .advocate-actions {
-      margin-top: 15px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 8px 12px;
-      margin: 5px 3px 0 0;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: background 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary {
-      background: #007bff;
-      color: #fff;
-    }
-
-    .btn-secondary {
-      background: #555;
-      color: #fff;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .slider-controls {
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    .slider-controls button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      margin: 0 5px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.6);
-      transform: scale(0);
-      animation: ripple-animation 0.6s linear;
-      pointer-events: none;
-    }
-
-    @keyframes ripple-animation {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
+    .advocates-section { padding: 20px; background: #fff; }
+    .back-link { display: inline-block; margin-bottom: 15px; text-decoration: none; color: #333; font-weight: bold; }
+    .advocates-slider { width: 100%; height: 80vh; overflow-x: auto; overflow-y: auto; scroll-snap-type: both mandatory; -webkit-overflow-scrolling: touch; border: 1px solid #ddd; padding: 10px; }
+    .advocates-track { display: grid; grid-template-columns: repeat(7, 300px); grid-auto-rows: auto; gap: 20px; }
+    .advocate-card { background: #fff; border-radius: 12px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); scroll-snap-align: start; transition: transform 0.3s ease; }
+    .advocate-image { text-align: center; margin-bottom: 10px; position: relative; }
+    .advocate-status { position: absolute; top: -8px; right: -8px; background: green; color: #fff; padding: 4px 8px; border-radius: 20px; font-size: 12px; }
+    .advocate-image img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+    .advocate-name { font-size: 16px; margin: 5px 0; color: #333; }
+    .advocate-title { font-size: 13px; color: #555; margin-bottom: 8px; }
+    .advocate-info { font-size: 13px; color: #444; margin-bottom: 10px; }
+    .info-item { margin: 3px 0; }
+    .specializations h4 { margin-bottom: 5px; font-size: 13px; color: #333; }
+    .specialization-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .specialization-tag { background: #eee; padding: 3px 6px; border-radius: 6px; font-size: 12px; }
+    .advocate-actions { margin-top: 10px; }
+    .btn { display: inline-block; padding: 6px 10px; margin: 3px 2px 0 0; border-radius: 8px; text-decoration: none; font-size: 12px; transition: background 0.3s; position: relative; overflow: hidden; }
+    .btn-primary { background: #007bff; color: #fff; }
+    .btn-secondary { background: #555; color: #fff; }
+    .btn:hover { opacity: 0.9; }
+    .slider-controls { text-align: center; margin-top: 10px; }
+    .slider-controls button { background: #007bff; color: white; border: none; padding: 6px 10px; margin: 5px; border-radius: 5px; cursor: pointer; font-size: 14px; }
+    .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.6); transform: scale(0); animation: ripple-animation 0.6s linear; pointer-events: none; }
+    @keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }
   </style>
 </head>
 <body>
-  <!-- Advocates Section -->
   <section class="advocates-section">
-    <div class="container">
-      <a href="index.html#services" class="back-link">
-        <i class="fas fa-arrow-left"></i>
-        Back to Services
-      </a>
+    <a href="Services.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+    <div class="advocates-slider">
+      <div class="advocates-track">
 
-      <div class="advocates-slider">
-        <div class="advocates-track">
-
-          <!-- Advocate cards go here (I kept your 6 from earlier) -->
-          <!-- Example (Advocate 1 shown): -->
-          <div>
-            <div class="advocate-image">
-              <div class="advocate-status">Available</div>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXRkaWHcU2uQkkFIwPq5d3t0LuoCPuTFYDpg&s" alt="Adv. Anika Sharma">
-            </div>
-            <div class="advocate-content">
-              <h3 class="advocate-name">Adv. Anika Sharma</h3>
-              <p class="advocate-title">Senior Corporate & Civil Law Specialist</p>
-              <div class="advocate-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43210</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> anika.sharma@legalconnect.in</div>
-                <div class="info-item"><i class="fas fa-graduation-cap"></i> 15+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (245 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Specializations:</h4>
-                <div class="specialization-tags">
-                  <span class="specialization-tag">Corporate Law</span>
-                  <span class="specialization-tag">Civil Litigation</span>
-                  <span class="specialization-tag">Contract Disputes</span>
-                  <span class="specialization-tag">Mergers & Acquisitions</span>
-                </div>
-              </div>
-              <div class="advocate-actions">
-                <a href="tel:+919876543210" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
-              </div>
-            </div>
-          </div> <!-- Advocate 2 -->
-          <div>
-            <div class="advocate-image">
-              <div class="advocate-status">Available</div>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmXDcJMUej_FAPvJAvQ9xm_PJZoJPG74Gcrw&s" alt="Adv. Rohan Verma">
-            </div>
-            <div class="advocate-content">
-              <h3 class="advocate-name">Adv. Rohan Verma</h3>
-              <p class="advocate-title">Criminal Defense Specialist</p>
-              <div class="advocate-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43211</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> rohan.verma@legalconnect.in</div>
-                <div class="info-item"><i class="fas fa-graduation-cap"></i> 12+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (198 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Specializations:</h4>
-                <div class="specialization-tags">
-                  <span class="specialization-tag">Criminal Defense</span>
-                  <span class="specialization-tag">White Collar Crimes</span>
-                  <span class="specialization-tag">Bail Applications</span>
-                  <span class="specialization-tag">High Court Appeals</span>
-                </div>
-              </div>
-              <div class="advocate-actions">
-                <a href="tel:+919876543211" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
-              </div>
+        <!-- Advocate 1 -->
+        <div class="advocate-card">
+          <div class="advocate-image">
+            <div class="advocate-status">Available</div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXRkaWHcU2uQkkFIwPq5d3t0LuoCPuTFYDpg&s" alt="Adv. Anika Sharma">
+          </div>
+          <h3 class="advocate-name">Adv. Anika Sharma</h3>
+          <p class="advocate-title">Senior Corporate & Civil Law Specialist</p>
+          <div class="advocate-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43210</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> anika.sharma@legalconnect.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 15+ Years Experience</div>
+            <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (245 Reviews)</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Corporate Law</span>
+              <span class="specialization-tag">Civil Litigation</span>
+              <span class="specialization-tag">Contract Disputes</span>
+              <span class="specialization-tag">Mergers & Acquisitions</span>
             </div>
           </div>
+          <div class="advocate-actions">
+            <a href="tel:+919876543210" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
 
-          <!-- Advocate 3 -->
-          <div>
-            <div class="advocate-image">
-              <div class="advocate-status">Available</div>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZZmDgDGM-0UYGfjV_l3UABm7AtpO2ABUcfQ&s" alt="Adv. Meera Singh">
-            </div>
-            <div class="advocate-content">
-              <h3 class="advocate-name">Adv. Meera Singh</h3>
-              <p class="advocate-title">Family & Matrimonial Law Expert</p>
-              <div class="advocate-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43212</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> meera.singh@legalconnect.in</div>
-                <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (312 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Specializations:</h4>
-                <div class="specialization-tags">
-                  <span class="specialization-tag">Divorce Proceedings</span>
-                  <span class="specialization-tag">Child Custody</span>
-                  <span class="specialization-tag">Domestic Violence</span>
-                  <span class="specialization-tag">Property Disputes</span>
-                </div>
-              </div>
-              <div class="advocate-actions">
-                <a href="tel:+919876543212" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
-              </div>
+        <!-- Advocate 2 -->
+        <div class="advocate-card">
+          <div class="advocate-image">
+            <div class="advocate-status">Available</div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmXDcJMUej_FAPvJAvQ9xm_PJZoJPG74Gcrw&s" alt="Adv. Rohan Verma">
+          </div>
+          <h3 class="advocate-name">Adv. Rohan Verma</h3>
+          <p class="advocate-title">Criminal Defense Specialist</p>
+          <div class="advocate-info">
+            <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+            <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43211</div>
+            <div class="info-item"><i class="fas fa-envelope"></i> rohan.verma@legalconnect.in</div>
+            <div class="info-item"><i class="fas fa-graduation-cap"></i> 12+ Years Experience</div>
+            <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (198 Reviews)</div>
+          </div>
+          <div class="specializations">
+            <h4>Specializations:</h4>
+            <div class="specialization-tags">
+              <span class="specialization-tag">Criminal Defense</span>
+              <span class="specialization-tag">White Collar Crimes</span>
+              <span class="specialization-tag">Bail Applications</span>
+              <span class="specialization-tag">High Court Appeals</span>
             </div>
           </div>
-
-          <!-- Advocate 4 -->
-          <div>
-            <div class="advocate-image">
-              <div class="advocate-status">Available</div>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjEa8UUBK-JSkLvs6SYxT0WxbC24mpE1u7rg&s" alt="Adv. Vikram Reddy">
-            </div>
-            <div class="advocate-content">
-              <h3 class="advocate-name">Adv. Vikram Reddy</h3>
-              <p class="advocate-title">Intellectual Property & Tech Law</p>
-              <div class="advocate-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43213</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> vikram.reddy@legalconnect.in</div>
-                <div class="info-item"><i class="fas fa-graduation-cap"></i> 8+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (167 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Specializations:</h4>
-                <div class="specialization-tags">
-                  <span class="specialization-tag">Patent Law</span>
-                  <span class="specialization-tag">Trademark Registration</span>
-                  <span class="specialization-tag">Copyright Protection</span>
-                  <span class="specialization-tag">Tech Startups</span>
-                </div>
-              </div>
-              <div class="advocate-actions">
-                <a href="tel:+919876543213" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Advocate 5 -->
-          <div>
-            <div class="advocate-image">
-              <div class="advocate-status">Available</div>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQic99mu80-DyEtQGWiXWg9ZG9eS8g3p5odVA&s" alt="Adv. Priya Nair"> 
-            </div>
-            <div class="advocate-content">
-              <h3 class="advocate-name">Adv. Priya Nair</h3>
-              <p class="advocate-title">Labour & Employment Law Expert</p>
-              <div class="advocate-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Chennai, Tamil Nadu</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43214</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> priya.nair@legalconnect.in</div>
-                <div class="info-item"><i class="fas fa-graduation-cap"></i> 13+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (289 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Specializations:</h4>
-                <div class="specialization-tags">
-                  <span class="specialization-tag">Employment Law</span>
-                  <span class="specialization-tag">Industrial Disputes</span>
-                  <span class="specialization-tag">Workers' Rights</span>
-                  <span class="specialization-tag">Company Compliance</span>
-                </div>
-              </div>
-              <div class="advocate-actions">
-                <a href="tel:+919876543214" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Advocate 6 -->
-          <div>
-            <div class="advocate-image">
-              <div class="advocate-status">Available</div>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnrgcTHxfAGJ-RxNecaJk0s7YHPFGmpU2FLQ&s" alt="Adv. Arjun Malhotra">
-            </div>
-            <div class="advocate-content">
-              <h3 class="advocate-name">Adv. Arjun Malhotra</h3>
-              <p class="advocate-title">Taxation & Financial Law Expert</p>
-              <div class="advocate-info">
-                <div class="info-item"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</div>
-                <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43215</div>
-                <div class="info-item"><i class="fas fa-envelope"></i> arjun.malhotra@legalconnect.in</div>
-                <div class="info-item"><i class="fas fa-graduation-cap"></i> 11+ Years Experience</div>
-                <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (154 Reviews)</div>
-              </div>
-              <div class="specializations">
-                <h4>Specializations:</h4>
-                <div class="specialization-tags">
-                  <span class="specialization-tag">Taxation Law</span>
-                  <span class="specialization-tag">Corporate Finance</span>
-                  <span class="specialization-tag">GST & Compliance</span>
-                  <span class="specialization-tag">Wealth Management</span>
-                </div>
-              </div>
-              <div class="advocate-actions">
-                <a href="tel:+919876543215" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
-                <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book Consultation</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <div class="slider-controls">
-        <button id="prevBtn">← Prev</button>
-        <button id="nextBtn">Next →</button>
-      </div>
+          <div class="advocate-actions">
+            <a href="tel:+919876543211" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+        <!-- Advocate 3 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg" alt="Adv. Meera Iyer">
+  </div>
+  <h3 class="advocate-name">Adv. Meera Iyer</h3>
+  <p class="advocate-title">Family & Divorce Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bengaluru, Karnataka</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43212</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> meera.iyer@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (180 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Divorce Cases</span>
+      <span class="specialization-tag">Child Custody</span>
+      <span class="specialization-tag">Domestic Violence</span>
+      <span class="specialization-tag">Mediation</span>
     </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543212" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 4 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://media.gettyimages.com/id/2178834009/photo/legal-consultant-lawyer-reviewing-the-official-documents.jpg?s=612x612&w=0&k=20&c=mJqRWIr06rYDBDw2-vBzynAcMkSoH5azdfla_jBuJIg=" alt="Adv. Vikram Singh">
+  </div>
+  <h3 class="advocate-name">Adv. Vikram Singh</h3>
+  <p class="advocate-title">Taxation & Labour Law Expert</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43213</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> vikram.singh@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (210 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Taxation</span>
+      <span class="specialization-tag">Labour Law</span>
+      <span class="specialization-tag">GST Disputes</span>
+      <span class="specialization-tag">Employee Rights</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543213" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 5 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://www.lassiwithlavina.com/wp-content/uploads/2015/10/Vanita-Gupta.jpg" alt="Adv. Priya Menon">
+  </div>
+  <h3 class="advocate-name">Adv. Priya Menon</h3>
+  <p class="advocate-title">Cyber Crime & IT Law Specialist</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kochi, Kerala</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43214</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> priya.menon@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 9+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.6/5 Rating (165 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Cyber Crime</span>
+      <span class="specialization-tag">Data Privacy</span>
+      <span class="specialization-tag">IT Contracts</span>
+      <span class="specialization-tag">Cybersecurity Laws</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543214" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 6 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://media.gettyimages.com/id/1134614653/photo/concerned-mature-indian-businessman-at-office-desk-with-laptop-computer.jpg?s=612x612&w=0&k=20&c=HWPl_AwkJFSwjDFuS_QE1cceYzk2uw5W-hxTz-HeR4k=" alt="Adv. Arjun Deshmukh">
+  </div>
+  <h3 class="advocate-name">Adv. Arjun Deshmukh</h3>
+  <p class="advocate-title">Intellectual Property Rights Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43215</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> arjun.deshmukh@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 11+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (175 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Patents</span>
+      <span class="specialization-tag">Copyright</span>
+      <span class="specialization-tag">Trademark</span>
+      <span class="specialization-tag">IP Litigation</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543215"class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+<!-- Advocate 7 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://media.gettyimages.com/id/1388855466/photo/businessman-having-a-phone-call-in-the-office.jpg?s=612x612&w=0&k=20&c=ugaFleCCBS2dKRwBtXhKpFbve6LSFbxick9IxLsWdEQ=" alt="Adv. Neeraj Kulkarni">
+  </div>
+  <h3 class="advocate-name">Adv. Neeraj Kulkarni</h3>
+  <p class="advocate-title">Constitutional & Human Rights Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Nagpur, Maharashtra</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43216</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> neeraj.kulkarni@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 18+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.9/5 Rating (230 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Fundamental Rights</span>
+      <span class="specialization-tag">Public Interest Litigation</span>
+      <span class="specialization-tag">Constitutional Amendments</span>
+      <span class="specialization-tag">Civil Liberties</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543216" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+<!-- Advocate 8 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://media.gettyimages.com/id/1358268236/photo/portrait-of-young-businesswoman.jpg?s=612x612&w=0&k=20&c=4aF3NJCS43GU8cvRa2FDJqjv8vfjOnc2owjksd8QOp0=" alt="Adv. Kavita Reddy">
+  </div>
+  <h3 class="advocate-name">Adv. Kavita Reddy</h3>
+  <p class="advocate-title">Environmental & Climate Law Specialist</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Hyderabad, Telangana</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43217</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> kavita.reddy@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 13+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (190 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Environmental Law</span>
+      <span class="specialization-tag">Climate Policy</span>
+      <span class="specialization-tag">NGO Advisory</span>
+      <span class="specialization-tag">Public Health</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543217"class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 9 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://tse1.mm.bing.net/th/id/OIP.3BtMOFAsifinof83Qpbv9gHaE8?pid=Api&P=0&h=180" alt="Adv. Sameer Joshi">
+  </div>
+  <h3 class="advocate-name">Adv. Sameer Joshi</h3>
+  <p class="advocate-title">Banking & Finance Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Ahmedabad, Gujarat</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43218</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> sameer.joshi@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 16+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (205 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Banking Law</span>
+      <span class="specialization-tag">Finance Disputes</span>
+      <span class="specialization-tag">Debt Recovery</span>
+      <span class="specialization-tag">Loan Agreements</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543218" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 10 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://tse3.mm.bing.net/th/id/OIP.hJ_wIwT09vpA-N81g2p3RAHaE7?pid=Api&P=0&h=180" alt="Adv. Sneha Chatterjee">
+  </div>
+  <h3 class="advocate-name">Adv. Sneha Chatterjee</h3>
+  <p class="advocate-title">Corporate & Arbitration Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kolkata, West Bengal</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43219</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> sneha.chatterjee@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 12+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (178 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Arbitration</span>
+      <span class="specialization-tag">Corporate Law</span>
+      <span class="specialization-tag">Dispute Resolution</span>
+      <span class="specialization-tag">Cross-border Contracts</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543219"class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 11 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://tse2.mm.bing.net/th/id/OIP.-3abBexnf2MrbNF7eIwWsQHaFj?pid=Api&P=0&h=180" alt="Adv. Harish Bansal">
+  </div>
+  <h3 class="advocate-name">Adv. Harish Bansal</h3>
+  <p class="advocate-title">Real Estate & Property Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Chandigarh, Punjab</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43220</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> harish.bansal@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 14+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (212 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Property Disputes</span>
+      <span class="specialization-tag">Land Acquisition</span>
+      <span class="specialization-tag">Real Estate Contracts</span>
+      <span class="specialization-tag">Tenant Rights</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543220" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 12 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://tse2.mm.bing.net/th/id/OIP.tTsAe0QaR5t2w2iaAoTQNgHaFE?pid=Api&P=0&h=180" alt="Adv. Aditi Kapoor">
+  </div>
+  <h3 class="advocate-name">Adv. Aditi Kapoor</h3>
+  <p class="advocate-title">Insurance & Accident Claims Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Lucknow, Uttar Pradesh</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43221</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> aditi.kapoor@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 9+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.6/5 Rating (160 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Insurance Claims</span>
+      <span class="specialization-tag">Accident Compensation</span>
+      <span class="specialization-tag">Consumer Protection</span>
+      <span class="specialization-tag">Settlement Negotiation</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543221" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 13 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://tse3.mm.bing.net/th/id/OIP.igPCNLAS38F2d4ZCRpK7WQHaH2?pid=Api&P=0&h=180" alt="Adv. Rajeev Malhotra">
+  </div>
+  <h3 class="advocate-name">Adv. Rajeev Malhotra</h3>
+  <p class="advocate-title">Corporate Compliance & Governance Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Gurugram, Haryana</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43222</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> rajeev.malhotra@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 20+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 5.0/5 Rating (280 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Corporate Compliance</span>
+      <span class="specialization-tag">Governance</span>
+      <span class="specialization-tag">Company Law Board</span>
+      <span class="specialization-tag">Securities Regulation</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543222" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 14 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://tse4.mm.bing.net/th/id/OIP.M0Uak0pyXetvVhkUU-RMOAHaEJ?pid=Api&P=0&h=180" alt="Adv. Divya Shetty">
+  </div>
+  <h3 class="advocate-name">Adv. Divya Shetty</h3>
+  <p class="advocate-title">Immigration & Citizenship Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mangalore, Karnataka</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43223</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> divya.shetty@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 8+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.5/5 Rating (150 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Immigration</span>
+      <span class="specialization-tag">Visa Issues</span>
+      <span class="specialization-tag">Citizenship</span>
+      <span class="specialization-tag">Work Permits</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543223"class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+<!-- Advocate 15 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://media.gettyimages.com/id/2186093890/photo/asian-indian-business-team-meeting.jpg?s=612x612&w=0&k=20&c=5jhdmt4KziuagmlPYYZvWasGtpZWo1lePqmNszaax8I=" alt="Adv. Manish Khurana">
+  </div>
+  <h3 class="advocate-name">Adv. Manish Khurana</h3>
+  <p class="advocate-title">Consumer Rights & Protection Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43224</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> manish.khurana@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 10+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.7/5 Rating (165 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Consumer Protection</span>
+      <span class="specialization-tag">Fraud Claims</span>
+      <span class="specialization-tag">E-commerce Disputes</span>
+      <span class="specialization-tag">Compensation</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543224" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+
+<!-- Advocate 16 -->
+<div class="advocate-card">
+  <div class="advocate-image">
+    <div class="advocate-status">Available</div>
+    <img src="https://media.istockphoto.com/id/1326920136/photo/shot-of-a-business-women-using-laptop-working-at-home-stock-photo.jpg?s=612x612&w=0&k=20&c=tDhOPNMfBUlZLy5titrUrOXfHVbhVosEoQveTwuuL1Y=" alt="Adv. Renu Deshmukh">
+  </div>
+  <h3 class="advocate-name">Adv. Renu Deshmukh</h3>
+  <p class="advocate-title">Employment & Labour Lawyer</p>
+  <div class="advocate-info">
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i> Nagpur, Maharashtra</div>
+    <div class="info-item"><i class="fas fa-phone"></i> +91 98765 43225</div>
+    <div class="info-item"><i class="fas fa-envelope"></i> renu.deshmukh@legalconnect.in</div>
+    <div class="info-item"><i class="fas fa-graduation-cap"></i> 15+ Years Experience</div>
+    <div class="info-item"><i class="fas fa-star"></i> 4.8/5 Rating (210 Reviews)</div>
+  </div>
+  <div class="specializations">
+    <h4>Specializations:</h4>
+    <div class="specialization-tags">
+      <span class="specialization-tag">Employment Law</span>
+      <span class="specialization-tag">Labour Disputes</span>
+      <span class="specialization-tag">Workplace Harassment</span>
+      <span class="specialization-tag">Employee Rights</span>
+    </div>
+  </div>
+  <div class="advocate-actions">
+    <a href="tel:+919876543225" class="btn btn-primary"><i class="fas fa-comment-dots"></i> Message us</a>
+    <a href="#" class="btn btn-secondary"><i class="fas fa-calendar"></i> Book</a>
+  </div>
+</div>
+
+
+
+   
   </section>
 
   <script>
-    // Card hover effect
     document.querySelectorAll('.advocate-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-      });
+      card.addEventListener('mouseenter', () => { card.style.transform = 'translateY(-5px) scale(1.02)'; });
+      card.addEventListener('mouseleave', () => { card.style.transform = 'translateY(0) scale(1)'; });
     });
 
-    // Ripple effect
     document.querySelectorAll('.btn').forEach(button => {
       button.addEventListener('click', function(e) {
         const ripple = document.createElement('span');
@@ -418,14 +544,11 @@
       });
     });
 
-    // Slider buttons
     const slider = document.querySelector('.advocates-slider');
-    document.getElementById('prevBtn').addEventListener('click', () => {
-      slider.scrollBy({ left: -320, behavior: 'smooth' });
-    });
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      slider.scrollBy({ left: 320, behavior: 'smooth' });
-    });
+    document.getElementById('prevBtn').addEventListener('click', () => slider.scrollBy({ left: -320, behavior: 'smooth' }));
+    document.getElementById('nextBtn').addEventListener('click', () => slider.scrollBy({ left: 320, behavior: 'smooth' }));
+    document.getElementById('upBtn').addEventListener('click', () => slider.scrollBy({ top: -320, behavior: 'smooth' }));
+    document.getElementById('downBtn').addEventListener('click', () => slider.scrollBy({ top: 320, behavior: 'smooth' }));
   </script>
 </body>
 </html>

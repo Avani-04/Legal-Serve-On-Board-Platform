@@ -1,0 +1,205 @@
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #f9fafc;
+  color: #2d3748;
+  line-height: 1.6;
+}
+
+/* Section wrapper */
+.onboarding {
+  padding: 50px 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+}
+#onboard {
+  display: block; /* hidden until button is clicked */
+}
+
+/* Header */
+.onboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.onboard-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.onboard-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Steps sidebar */
+.onboard-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: default;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #333;
+}
+
+.step.active .step-number {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+/* Form container */
+.onboard-form {
+  margin-top: 20px;
+}
+
+/* Hide all steps */
+.form-step {
+  display: block;
+}
+
+/* Show only active step */
+.form-step.active {
+  display: block;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+  color: #444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #667eea;
+}
+
+/* Row layout */
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Checkbox group */
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.checkbox-group label {
+  font-weight: normal;
+  color: #333;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: #edf2f7;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+/* Validation states */
+input.error, select.error, textarea.error {
+  border-color: #e53e3e;
+}
+
+input.success, select.success, textarea.success {
+  border-color: #38a169;
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 13px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Success overlay button fix */
+.success-overlay button:hover {
+  opacity: 0.9;
+}
