@@ -1,0 +1,29 @@
+{
+  "name": "legal-serve-on-board-platform",
+  "version": "1.0.0",
+  "description": "such as Advocates, Arbitrators, Mediators, Notaries, Document\r Writers, etc on eMarket Place for extending Legal Services to Citizens in India",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avani-04/Legal-Serve-On-Board-Platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Avani-04/Legal-Serve-On-Board-Platform/issues"
+  },
+  "homepage": "https://github.com/Avani-04/Legal-Serve-On-Board-Platform#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.2",
+    "socket.io": "^4.8.1",
+    "uuid": "^13.0.0"
+  }
+}

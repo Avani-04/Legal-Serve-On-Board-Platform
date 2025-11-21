@@ -12,7 +12,7 @@
 <body>
     <!-- Services Section -->
     <section id="services" class="services">
-            <a href="Index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home Page</a>
+            <a href="Dashboard.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home Page</a>
 
         <div class="container">
             <div class="section-header">
@@ -110,4 +110,30 @@
             </div>
         </div>
     </section>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+  // Connect to backend server
+  const socket = io("http://localhost:3000");  // use your backend URL
+
+  // Example: Use the logged-in client’s ID from localStorage/session (or dummy for now)
+  const clientId = localStorage.getItem("clientId") || "client-123";
+
+  socket.on("connect", () => {
+    console.log("Connected to backend:", socket.id);
+
+    // Register this browser as a client
+    socket.emit("register", { role: "client", id: clientId });
+  });
+
+  socket.on("registered", () => {
+    console.log("✅ Client registered with server");
+  });
+
+  // When professional updates appointment (accepted/rejected)
+  socket.on("appointment:update", (appt) => {
+    alert(`Your appointment with ${appt.professional} is ${appt.status}`);
+  });
+</script>
+
 </body>
+</html>

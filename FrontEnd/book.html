@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Lawyer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1c2833, #2c3e50);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .booking-container {
+      background: #fff;
+      color: #2c3e50;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1c2833;
+      margin-bottom: 20px;
+      font-size: 26px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    button {
+      background: #1c2833;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #34495e;
+    }
+
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: #fff;
+      color: #2c3e50;
+      padding: 30px 40px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 400px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .popup-content h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      color: #1c2833;
+    }
+
+    .popup-content p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .popup-content button {
+      background: #1c2833;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .popup-content button:hover {
+      background: #34495e;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="booking-container">
+    <h2>Book an Appointment</h2>
+    <form id="bookingForm">
+      <label>Full Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label>Age:</label>
+      <input type="number" id="age" placeholder="Enter your age" required>
+
+      <label>Contact Number:</label>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+      <label>City:</label>
+      <input type="text" id="city" placeholder="Enter your city" required>
+
+      <label>Purpose of Appointment:</label>
+      <select id="purpose" required>
+        <option value="">-- Select a purpose --</option>
+        <option>Property Dispute</option>
+        <option>Divorce / Family Case</option>
+        <option>Business Issue</option>
+        <option>Criminal Case</option>
+        <option>Legal Notice</option>
+        <option>Others</option>
+      </select>
+
+      <label>Additional Details:</label>
+      <textarea id="details" placeholder="Describe your issue briefly..."></textarea>
+
+      <button type="submit">Submit Booking</button>
+    </form>
+  </div>
+
+  <div class="popup" id="successPopup">
+    <div class="popup-content">
+      <i class="fa-solid fa-circle-check" style="font-size: 40px; color: #27ae60; margin-bottom: 10px;"></i>
+      <h3>Booking Successful!</h3>
+      <p>Your booking has been successfully completed.<br>
+      You’ll receive a confirmation email within 24 hours.</p>
+      <button onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+    const popup = document.getElementById('successPopup');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      if (name === '' || phone === '') {
+        alert('Please fill all required fields!');
+        return;
+      }
+
+      // Save to localStorage
+      const appointment = {
+        name: name,
+        age: document.getElementById('age').value,
+        phone: phone,
+        city: document.getElementById('city').value,
+        purpose: document.getElementById('purpose').value,
+        details: document.getElementById('details').value,
+        bookedOn: new Date().toLocaleString()
+      };
+
+      let list = JSON.parse(localStorage.getItem("appointments")) || [];
+      list.push(appointment);
+      localStorage.setItem("appointments", JSON.stringify(list));
+
+      popup.style.display = 'flex';
+      form.reset();
+    });
+
+    function closePopup() {
+      popup.style.display = 'none';
+      window.location.href = 'Advocates.html';
+    }
+  </script>
+  
+</body>
+</html>

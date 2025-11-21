@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, #4a90e2, #7e57c2);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .profile-title {
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+        
+        .profile-subtitle {
+            opacity: 0.8;
+            font-size: 16px;
+        }
+        
+        .profile-form {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 15px;
+            color: #333;
+            transition: border 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .section-title {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+            color: #4a90e2;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .btn {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #3a7bd5;
+        }
+        
+        .form-actions {
+            text-align: right;
+            margin-top: 30px;
+        }
+        
+        .reset-btn {
+            background-color: #e0e0e0;
+            color: #333;
+            margin-right: 10px;
+        }
+        
+        .reset-btn:hover {
+            background-color: #d0d0d0;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Form validation styling */
+        .error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        input.invalid, select.invalid, textarea.invalid {
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <h1 class="profile-title">My Profile</h1>
+                <p class="profile-subtitle">Complete your profile information</p>
+            </div>
+            
+            <div class="profile-form">
+                <div id="alertMessage" class="alert"></div>
+                
+                <form id="profileForm"  >
+                    <h3 class="section-title">Personal Information</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name*</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                            <div class="error" id="firstNameError">Please enter your first name</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Last Name*</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                            <div class="error" id="lastNameError">Please enter your last name</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address*</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error" id="emailError">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                            <div class="error" id="phoneError">Please enter a valid phone number</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="birthdate">Date of Birth</label>
+                            <input type="date" id="birthdate" name="birthdate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender">
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="prefer-not-to-say">Prefer not to say</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <h3 class="section-title">Contact Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" placeholder="Street address">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="state">State/Province</label>
+                            <input type="text" id="state" name="state">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="zipCode">ZIP/Postal Code</label>
+                            <input type="text" id="zipCode" name="zipCode">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" name="country">
+                            <option value="">Select country</option>
+                            <option value="us">United States</option>
+                            <option value="ca">Canada</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="au">Australia</option>
+                            <option value="in">India</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <h3 class="section-title">Additional Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio" name="bio" placeholder="Tell us about yourself"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="resetBtn" class="btn reset-btn">Reset</button>
+                        <button type="submit" class="btn">Save Profile</button>
+                    </div>
+                </form>
+                <form action="Dashboard.html">
+                    <button type="submit">Next</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileForm = document.getElementById('profileForm');
+            const resetBtn = document.getElementById('resetBtn');
+            const alertMessage = document.getElementById('alertMessage');
+            
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                
+                // Reset validation states
+                const errorElements = document.querySelectorAll('.error');
+                errorElements.forEach(element => {
+                    element.style.display = 'none';
+                });
+                
+                const formElements = document.querySelectorAll('input, select, textarea');
+                formElements.forEach(element => {
+                    element.classList.remove('invalid');
+                });
+                
+                // Required fields validation
+                const firstName = document.getElementById('firstName');
+                const lastName = document.getElementById('lastName');
+                const email = document.getElementById('email');
+                
+                if (firstName.value.trim() === '') {
+                    showError(firstName, 'firstNameError');
+                    isValid = false;
+                }
+                
+                if (lastName.value.trim() === '') {
+                    showError(lastName, 'lastNameError');
+                    isValid = false;
+                }
+                
+                if (email.value.trim() === '' || !isValidEmail(email.value)) {
+                    showError(email, 'emailError');
+                    isValid = false;
+                }
+                
+                // Phone validation (if provided)
+                const phone = document.getElementById('phone');
+                if (phone.value.trim() !== '' && !isValidPhone(phone.value)) {
+                    showError(phone, 'phoneError');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            function showError(inputElement, errorId) {
+                inputElement.classList.add('invalid');
+                document.getElementById(errorId).style.display = 'block';
+            }
+            
+            function isValidEmail(email) {
+                const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                return regex.test(email);
+            }
+            
+            function isValidPhone(phone) {
+                const regex = /^[0-9]{10}$/;
+                return regex.test(phone);
+            }
+            
+            // Handle form submission
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    const formData = {
+                        firstName: firstName.value,
+                        lastName: lastName.value,
+                        email: email.value,
+                        phone: phone.value,
+                        birthdate: document.getElementById('birthdate').value,
+                        gender: document.getElementById('gender').value,
+                        address: document.getElementById('address').value,
+                        city: document.getElementById('city').value,
+                        state: document.getElementById('state').value,
+                        zipCode: document.getElementById('zipCode').value,
+                        country: document.getElementById('country').value,
+                        bio: document.getElementById('bio').value
+                    };
+                    
+                    // Save to localStorage
+                    localStorage.setItem('profileData', JSON.stringify(formData));
+                    
+                    // Show success alert
+                    alertMessage.textContent = 'Profile saved successfully!';
+                    alertMessage.classList.remove('alert-error');
+                    alertMessage.classList.add('alert-success');
+                    alertMessage.style.display = 'block';
+                    
+                    // Optionally, redirect to profile display page
+                    
+                } else {
+                    alertMessage.textContent = 'Please fill in all required fields correctly!';
+                    alertMessage.classList.remove('alert-success');
+                    alertMessage.classList.add('alert-error');
+                    alertMessage.style.display = 'block';
+                }
+            });
+            
+            // Handle form reset
+            resetBtn.addEventListener('click', function() {
+                profileForm.reset();
+                alertMessage.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

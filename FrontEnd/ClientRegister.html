@@ -55,14 +55,14 @@
                 </div>
                 
                 <div class="signup-link">
-                    Don't have an account? <a href="#">Sign up as Client</a>
+                    Don't have an account? <a href="ClientSignUp.html">Sign up as Client</a>
                 </div>
             </div>
 
             </div>
             </div>
 
-        <script>
+       <!-- <script>
             function handleLogin(event, userType) {
     event.preventDefault(); // stop form from refreshing page
 
@@ -97,6 +97,94 @@
     }, 1500);
 }
 
-        </script>
+        </script> -->
+
+        <script>
+    // Dummy client users database
+    const clientUsers = [
+        { email: 'client1@example.com', password: 'client123' },
+        { email: 'client2@example.com', password: 'client456' }
+    ];
+
+    function handleLogin(event, type) {
+        event.preventDefault();
+
+        // Clear old messages
+        document.getElementById('success-message').textContent = '';
+        document.getElementById('error-message').textContent = '';
+
+        // Get client login values
+        const email = document.getElementById('client-email').value.trim();
+        const password = document.getElementById('client-password').value;
+
+        // Validation
+        if (email === '') {
+            showError("Email is required");
+            return;
+        } else if (!isValidEmail(email)) {
+            showError("Please enter a valid email");
+            return;
+        }
+
+        if (password === '') {
+            showError("Password is required");
+            return;
+        }
+
+        // Check user authentication
+        const user = clientUsers.find(user => user.email === email);
+
+        if (!user) {
+            showError("Account not found");
+        } else if (user.password !== password) {
+            showError("Wrong password");
+        } else {
+            showSuccess("Login successful! Redirecting...");
+            setTimeout(() => {
+                window.location.href = "dashboard.html"; // ✅ Redirect after login
+            }, 1200);
+        }
+    }
+
+    // Show error message
+    function showError(message) {
+        const errorEl = document.getElementById('error-message');
+        errorEl.textContent = message;
+        errorEl.style.display = "block";
+    }
+
+    // Show success message
+    function showSuccess(message) {
+        const successEl = document.getElementById('success-message');
+        successEl.textContent = message;
+        successEl.style.display = "block";
+    }
+
+    // Email validation regex
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+</script>
+
+<script>
+  document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("http://localhost:5000/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    alert(data.message);
+  });
+</script>
+
+
             </body>
 </html>

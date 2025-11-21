@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitration AI Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .message {
+      background: white;
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .user {
+      align-self: flex-end;
+      background: #3498db;
+      color: white;
+    }
+    .ai {
+      align-self: flex-start;
+      background: #ecf0f1;
+    }
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+    button {
+      background: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #34495e;
+    }
+
+    /* Vertical prompt buttons */
+    .suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .suggestions button {
+      background: #fff;
+      color: #2c3e50;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: left;
+      transition: 0.3s;
+    }
+    .suggestions button:hover {
+      background: #2c3e50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>⚖️ Arbitration AI Assistant</header>
+  
+  <div class="chat-container">
+
+    <!-- Vertical suggestion prompts for clients -->
+    <div class="suggestions">
+      <button onclick="sendPrompt('I have a business contract dispute')">💼 I have a business contract dispute</button>
+      <button onclick="sendPrompt('My tenant refuses to vacate the property')">🏠 My tenant refuses to vacate the property</button>
+      <button onclick="sendPrompt('I was cheated by my business partner')">🤝 I was cheated by my business partner</button>
+      <button onclick="sendPrompt('How to start arbitration for a payment dispute?')">💰 How to start arbitration for a payment dispute?</button>
+      <button onclick="sendPrompt('I want to resolve a dispute without going to court')">⚖️ I want to resolve a dispute without going to court</button>
+      <button onclick="sendPrompt('How long does arbitration take?')">⏳ How long does arbitration take?</button>
+      <button onclick="sendPrompt('What are arbitration fees?')">💵 What are arbitration fees?</button>
+      <button onclick="sendPrompt('Can I appeal an arbitrator’s decision?')">📜 Can I appeal an arbitrator’s decision?</button>
+      <button onclick="sendPrompt('I need an arbitrator for a property boundary issue')">🧱 I need an arbitrator for a property boundary issue</button>
+      <button onclick="sendPrompt('How to find a professional arbitrator near me?')">📍 How to find a professional arbitrator near me?</button>
+    </div>
+
+    <div class="messages" id="chatBox"></div>
+    
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Type your arbitration-related question..." onkeypress="handleKey(event)">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.innerText = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      appendMessage(text, "user");
+      input.value = "";
+      setTimeout(() => {
+        fakeAIResponse(text);
+      }, 600);
+    }
+
+    function sendPrompt(text) {
+      appendMessage(text, "user");
+      fakeAIResponse(text);
+    }
+
+    function fakeAIResponse(userText) {
+      let reply;
+      const lower = userText.toLowerCase();
+
+      if (lower.includes("business"))
+        reply = "For business contract disputes, arbitration helps you resolve matters privately and faster than court. We can connect you with a commercial arbitrator.";
+      else if (lower.includes("tenant"))
+        reply = "If your tenant refuses to vacate, you can initiate arbitration if your rental agreement includes an arbitration clause.";
+      else if (lower.includes("partner"))
+        reply = "A business partner dispute can be resolved through arbitration — share your contract and we’ll help assign a neutral arbitrator.";
+      else if (lower.includes("payment"))
+        reply = "To start arbitration for payment issues, send a notice to the other party and nominate an arbitrator. We can help you draft it.";
+      else if (lower.includes("resolve") || lower.includes("court"))
+        reply = "Arbitration and mediation are great alternatives to court — quicker, confidential, and less expensive.";
+      else if (lower.includes("how long"))
+        reply = "Most arbitration cases are resolved within 6–12 months, depending on complexity.";
+      else if (lower.includes("fee"))
+        reply = "Arbitration fees depend on claim value, number of arbitrators, and institution. Generally, they are lower than court litigation costs.";
+      else if (lower.includes("appeal") || lower.includes("decision"))
+        reply = "You can challenge an arbitral award under Section 34 of the Arbitration and Conciliation Act, within 90 days of receiving it.";
+      else if (lower.includes("property") || lower.includes("boundary"))
+        reply = "Property boundary disputes can be efficiently resolved through an arbitrator specializing in real estate matters.";
+      else if (lower.includes("find") || lower.includes("near"))
+        reply = "We can help you find certified arbitrators near your area. Please share your city or pin code.";
+      else
+        reply = "Our Arbitration AI Assistant can help you connect with professional arbitrators and explain your dispute resolution options.";
+
+      appendMessage(reply, "ai");
+    }
+
+    function handleKey(e) {
+      if (e.key === "Enter") sendMessage();
+    }
+  </script>
+</body>
+</html>

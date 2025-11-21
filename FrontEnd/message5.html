@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Writer AI Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background: #1b4f72;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+
+    .message {
+      background: white;
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .user {
+      align-self: flex-end;
+      background: #2471a3;
+      color: white;
+    }
+
+    .ai {
+      align-self: flex-start;
+      background: #ecf0f1;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    button {
+      background: #1b4f72;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #154360;
+    }
+
+    /* Vertical prompt buttons */
+    .suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .suggestions button {
+      background: #fff;
+      color: #1b4f72;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: left;
+      transition: 0.3s;
+    }
+
+    .suggestions button:hover {
+      background: #1b4f72;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>🖋️ Document Writer AI Assistant</header>
+  
+  <div class="chat-container">
+
+    <!-- Vertical suggestion prompts -->
+    <div class="suggestions">
+      <button onclick="sendPrompt('I need help drafting a professional letter')">📄 I need help drafting a professional letter</button>
+      <button onclick="sendPrompt('Can you help me write a business proposal?')">💼 Can you help me write a business proposal?</button>
+      <button onclick="sendPrompt('I want to format my legal document properly')">⚖️ I want to format my legal document properly</button>
+      <button onclick="sendPrompt('Please draft an agreement between two parties')">🤝 Please draft an agreement between two parties</button>
+      <button onclick="sendPrompt('How to write an affidavit or declaration?')">📑 How to write an affidavit or declaration?</button>
+      <button onclick="sendPrompt('I need help proofreading my document')">🔍 I need help proofreading my document</button>
+      <button onclick="sendPrompt('How to create a perfect resume or CV?')">📋 How to create a perfect resume or CV?</button>
+      <button onclick="sendPrompt('I need to draft a contract for freelancers')">🖊️ I need to draft a contract for freelancers</button>
+      <button onclick="sendPrompt('Can you prepare a confidentiality agreement?')">🔒 Can you prepare a confidentiality agreement?</button>
+      <button onclick="sendPrompt('What format should I use for official reports?')">📘 What format should I use for official reports?</button>
+    </div>
+
+    <div class="messages" id="chatBox"></div>
+    
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Type your document-related query..." onkeypress="handleKey(event)">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.innerText = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      appendMessage(text, "user");
+      input.value = "";
+      setTimeout(() => {
+        fakeAIResponse(text);
+      }, 600);
+    }
+
+    function sendPrompt(text) {
+      appendMessage(text, "user");
+      fakeAIResponse(text);
+    }
+
+    function fakeAIResponse(userText) {
+      let reply;
+      const lower = userText.toLowerCase();
+
+      if (lower.includes("letter"))
+        reply = "Sure! I can help you draft a professional letter. Please specify if it's for business, job application, or personal purpose.";
+      else if (lower.includes("proposal"))
+        reply = "For a business proposal, include company intro, problem statement, proposed solution, timeline, and pricing.";
+      else if (lower.includes("format") || lower.includes("legal"))
+        reply = "Legal documents should follow standard formatting: justified text, margins, and clause numbering for clarity.";
+      else if (lower.includes("agreement"))
+        reply = "A basic agreement includes parties involved, terms, duration, payment, and signatures at the end.";
+      else if (lower.includes("affidavit") || lower.includes("declaration"))
+        reply = "An affidavit usually starts with a title, followed by your declaration, reason, and a notary signature area.";
+      else if (lower.includes("proofread"))
+        reply = "Sure! Upload your document text and I’ll suggest grammar, structure, and tone improvements.";
+      else if (lower.includes("resume") || lower.includes("cv"))
+        reply = "A great resume includes a summary, skills, experience, education, and achievements — keep it concise and clean.";
+      else if (lower.includes("freelancer") || lower.includes("contract"))
+        reply = "A freelancer contract should define work scope, payment schedule, deadlines, and ownership rights.";
+      else if (lower.includes("confidentiality") || lower.includes("nda"))
+        reply = "A confidentiality agreement protects sensitive information. It defines what info is private and the penalty for disclosure.";
+      else if (lower.includes("report"))
+        reply = "Official reports should follow structure: title page, summary, main content with headings, and conclusion.";
+      else
+        reply = "I can help you draft, edit, or format any professional or legal document. What kind of file do you want to prepare?";
+
+      appendMessage(reply, "ai");
+    }
+
+    function handleKey(e) {
+      if (e.key === "Enter") sendMessage();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Consultant AI Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background: #4a235a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .message {
+      background: white;
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .user {
+      align-self: flex-end;
+      background: #7d3c98;
+      color: white;
+    }
+    .ai {
+      align-self: flex-start;
+      background: #ecf0f1;
+    }
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+    button {
+      background: #4a235a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #5b2c6f;
+    }
+
+    /* Vertical prompt buttons */
+    .suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .suggestions button {
+      background: #fff;
+      color: #4a235a;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: left;
+      transition: 0.3s;
+    }
+    .suggestions button:hover {
+      background: #4a235a;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>⚖️ Legal Consultant AI Assistant</header>
+  
+  <div class="chat-container">
+
+    <!-- Vertical suggestion prompts -->
+    <div class="suggestions">
+      <button onclick="sendPrompt('I need legal advice for a property dispute')">🏠 Legal advice for a property dispute</button>
+      <button onclick="sendPrompt('I want to register my new company')">🏢 I want to register my new company</button>
+      <button onclick="sendPrompt('I need help drafting a contract')">📑 I need help drafting a contract or agreement</button>
+      <button onclick="sendPrompt('How can I protect my business legally?')">💼 How can I protect my business legally?</button>
+      <button onclick="sendPrompt('I need consultation for a family issue')">👨‍👩‍👧 I need legal consultation for a family issue</button>
+      <button onclick="sendPrompt('I received a legal notice')">📬 I received a legal notice, what should I do?</button>
+      <button onclick="sendPrompt('Can I file a defamation case?')">🗣️ Can I file a defamation or reputation case?</button>
+      <button onclick="sendPrompt('I need help with employment law issues')">👔 I need help with employment or workplace law</button>
+      <button onclick="sendPrompt('How to file a consumer complaint?')">🛒 How to file a consumer complaint?</button>
+      <button onclick="sendPrompt('What are the legal steps to start a partnership?')">🤝 What are the legal steps to start a partnership?</button>
+    </div>
+
+    <div class="messages" id="chatBox"></div>
+    
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Type your legal question..." onkeypress="handleKey(event)">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.innerText = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      appendMessage(text, "user");
+      input.value = "";
+      setTimeout(() => {
+        fakeAIResponse(text);
+      }, 600);
+    }
+
+    function sendPrompt(text) {
+      appendMessage(text, "user");
+      fakeAIResponse(text);
+    }
+
+    function fakeAIResponse(userText) {
+      let reply;
+      const lower = userText.toLowerCase();
+
+      if (lower.includes("property"))
+        reply = "For property disputes, we can help you draft legal notices or connect you with a civil lawyer.";
+      else if (lower.includes("register") || lower.includes("company"))
+        reply = "To register your company, you’ll need PAN, address proof, and business details — we can assist with the process.";
+      else if (lower.includes("contract") || lower.includes("agreement"))
+        reply = "Our consultants can help you draft legally valid agreements for business, partnership, or freelance work.";
+      else if (lower.includes("business"))
+        reply = "To protect your business, we recommend registering trademarks and drafting proper legal policies.";
+      else if (lower.includes("family"))
+        reply = "We can guide you on divorce, adoption, or family mediation through our family law experts.";
+      else if (lower.includes("notice"))
+        reply = "If you’ve received a legal notice, it’s important not to ignore it — we can help you draft a proper response.";
+      else if (lower.includes("defamation"))
+        reply = "Yes, you can file a defamation case if false statements harm your reputation — we’ll guide you through the process.";
+      else if (lower.includes("employment") || lower.includes("workplace"))
+        reply = "For employment issues, we can review your contract, help with unfair termination cases, or HR disputes.";
+      else if (lower.includes("consumer"))
+        reply = "Consumer complaints can be filed in the District Forum — we’ll help you prepare your case and documents.";
+      else if (lower.includes("partnership"))
+        reply = "To start a partnership legally, you need a registered agreement, partner consent, and business registration.";
+      else
+        reply = "Our AI can connect you with a specialized legal consultant for your specific issue.";
+
+      appendMessage(reply, "ai");
+    }
+
+    function handleKey(e) {
+      if (e.key === "Enter") sendMessage();
+    }
+  </script>
+</body>
+</html>

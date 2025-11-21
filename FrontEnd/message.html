@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal AI Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .message {
+      background: white;
+      border-radius: 10px;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      max-width: 80%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .user {
+      align-self: flex-end;
+      background: #3498db;
+      color: white;
+    }
+    .ai {
+      align-self: flex-start;
+      background: #ecf0f1;
+    }
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+    button {
+      background: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #34495e;
+    }
+
+    /* Vertical prompt buttons */
+    .suggestions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .suggestions button {
+      background: #fff;
+      color: #2c3e50;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: left;
+      transition: 0.3s;
+    }
+    .suggestions button:hover {
+      background: #2c3e50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>⚖️ Legal AI Assistant</header>
+  
+  <div class="chat-container">
+
+    <!-- Vertical suggestion prompts -->
+    <div class="suggestions">
+      <button onclick="sendPrompt('I need a lawyer for property dispute')">🏠 I need a lawyer for a property dispute</button>
+      <button onclick="sendPrompt('Help me with a divorce case')">💔 Help me with a divorce or family case</button>
+      <button onclick="sendPrompt('How to file a legal notice?')">📄 How to file a legal notice?</button>
+      <button onclick="sendPrompt('I was cheated in a business deal')">💼 I was cheated in a business deal</button>
+      <button onclick="sendPrompt('I want to register my company')">🏢 I want to register my new company</button>
+      <button onclick="sendPrompt('Can I get bail for a friend?')">⚖️ Can I get bail for a friend?</button>
+      <button onclick="sendPrompt('I need help with a cybercrime complaint')">💻 I need help with a cybercrime issue</button>
+      <button onclick="sendPrompt('What is the process to make a will?')">📝 What is the process to make a will?</button>
+      <button onclick="sendPrompt('How to file a consumer complaint?')">🛒 How to file a consumer complaint?</button>
+      <button onclick="sendPrompt('I received a court notice, what should I do?')">📬 I received a court notice — what should I do?</button>
+    </div>
+
+    <div class="messages" id="chatBox"></div>
+    
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Type your legal question..." onkeypress="handleKey(event)">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.innerText = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (text === "") return;
+
+      appendMessage(text, "user");
+      input.value = "";
+      setTimeout(() => {
+        fakeAIResponse(text);
+      }, 600);
+    }
+
+    function sendPrompt(text) {
+      appendMessage(text, "user");
+      fakeAIResponse(text);
+    }
+
+    function fakeAIResponse(userText) {
+      let reply;
+      const lower = userText.toLowerCase();
+
+      if (lower.includes("property"))
+        reply = "For property disputes, we can connect you to civil lawyers experienced in real estate law.";
+      else if (lower.includes("divorce"))
+        reply = "For divorce cases, our family law experts can guide you through mediation or filing procedures.";
+      else if (lower.includes("legal notice"))
+        reply = "You can draft a legal notice with our advocates—please share the case details.";
+      else if (lower.includes("business"))
+        reply = "We’ll help you consult a corporate lawyer for your business dispute.";
+      else if (lower.includes("bail"))
+        reply = "For bail-related issues, our criminal lawyers can assist with the required documentation and hearing.";
+      else if (lower.includes("cyber"))
+        reply = "Cybercrime cases can be filed online at the Cyber Cell — we can connect you to a specialist lawyer.";
+      else if (lower.includes("will"))
+        reply = "To draft a will, you’ll need ID proof, witnesses, and a registered document—our lawyers can assist.";
+      else if (lower.includes("consumer"))
+        reply = "For consumer complaints, you can file a case in the District Consumer Forum — we’ll help you prepare it.";
+      else if (lower.includes("court notice"))
+        reply = "If you’ve received a court notice, please share the details so we can connect you to a suitable lawyer.";
+      else if (lower.includes("register") || lower.includes("company"))
+        reply = "For company registration, you’ll need PAN, address proof, and a business plan. We can help with legal filing.";
+      else
+        reply = "Our legal AI can connect you with suitable advocates based on your issue.";
+
+      appendMessage(reply, "ai");
+    }
+
+    function handleKey(e) {
+      if (e.key === "Enter") sendMessage();
+    }
+  </script>
+</body>
+</html>

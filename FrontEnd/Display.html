@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .profile-header {
+            background-color: black;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .profile-header h1 {
+            margin-bottom: 5px;
+        }
+        .profile-content {
+            padding: 20px;
+            font-size: x-large;
+        }
+        .profile-content p {
+            margin: 10px 0;
+        }
+        .profile-content .label {
+            font-weight: bold;
+            font-size: x-large;
+        }
+        .profile-card button {
+      width: 30%;
+      padding: 15px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        <div class="profile-header">
+            <h1>Profile Information</h1>
+        </div>
+        <div class="profile-content">
+            <p><span class="label">Name:</span> <span id="displayFirstName"></span></p>
+    
+            <p><span class="label">Email:</span> <span id="displayEmail"></span></p>
+            <p><span class="label">Phone:</span> <span id="displayPhone"></span></p>
+            <p><span class="label">Birthdate:</span> <span id="displayBirthdate"></span></p>
+            <p><span class="label">Gender:</span> <span id="displayGender"></span></p>
+            <p><span class="label">Address:</span> <span id="displayAddress"></span></p>
+            <p><span class="label">City:</span> <span id="displayCity"></span></p>
+            <p><span class="label">State:</span> <span id="displayState"></span></p>
+            <p><span class="label">ZIP Code:</span> <span id="displayZipCode"></span></p>
+            <p><span class="label">Country:</span> <span id="displayCountry"></span></p>
+            
+        </div>
+        <form action="ClientRegister.html">
+            <button type="submit">log out</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileData = JSON.parse(localStorage.getItem('profileData'));
+            
+            if (profileData) {
+                document.getElementById('displayFirstName').textContent = profileData.firstName;
+                document.getElementById('displayEmail').textContent = profileData.email;
+                document.getElementById('displayPhone').textContent = profileData.phone;
+                document.getElementById('displayBirthdate').textContent = profileData.birthdate;
+                document.getElementById('displayGender').textContent = profileData.gender;
+                document.getElementById('displayAddress').textContent = profileData.address;
+                document.getElementById('displayCity').textContent = profileData.city;
+                document.getElementById('displayState').textContent = profileData.state;
+                document.getElementById('displayZipCode').textContent = profileData.zipCode;
+                document.getElementById('displayCountry').textContent = profileData.country;
+                
+            } else {
+                alert('No profile data found.');
+            }
+        });
+    </script>
+</body>
+</html>
